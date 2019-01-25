@@ -30,9 +30,9 @@
                     </div>             
                 </div>
             <% }); %>
-            <% if(typeof session.flash.errors != "undefined" && session.flash.errors.notLogged) { %>
+            <% if(typeof flash.errors != "undefined" && flash.errors.notLogged) { %>
                 <div class="isNotLogged">
-                    <%= session.flash.errors.notLogged %>
+                    <%= flash.errors.notLogged %>
                     <a href="/auth/login" title="<%= lang['views.users.signInTxt'] %>">
                         <div class="">
                             <h3><%= lang['views.loginTxt'] %></h3>

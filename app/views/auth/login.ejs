@@ -9,17 +9,17 @@
         <h5><%= lang['views.login.pleaseLoginTxt'] %></h5><br>
         <%= lang['views.usernameTxt'] %>
         <input type="text" name="username" autofocus><br>
-        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.username) { %>
+        <% if(typeof flash.errors != "undefined" && flash.errors.username) { %>
           <div class="username-exists">        
-            <%= session.flash.errors.username %>         
+            <%= flash.errors.username %>         
           </div>
         <% } %>
         <br>    
         <%= lang['views.passwordTxt'] %>
         <input type="password" name="password"><br>
-        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.password) { %>
+        <% if(typeof flash.errors != "undefined" && flash.errors.password) { %>
           <div class="small-password">      
-            <%= session.flash.errors.password %>        
+            <%= flash.errors.password %>        
           </div>
         <% } %>
         <br>

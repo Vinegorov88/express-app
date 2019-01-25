@@ -8,30 +8,30 @@
         </div>
           <%= lang['views.nameTxt'] %><br> 
           <input type="text" name="name"><br><br>
-          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.name) { %>
+          <% if (typeof flash.errors != "undefined" && flash.errors.name) { %>
             <div class="empty-fields">          
-              <%= session.flash.errors.name %>           
+              <%= flash.errors.name %>           
             </div>
           <% } %>
           <%= lang['views.emailTxt'] %><br>
           <input type="text" name="email"><br><br>
-          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.email) { %>
+          <% if (typeof flash.errors != "undefined" && flash.errors.email) { %>
             <div class="empty-fields">           
-              <%= session.flash.errors.email %>       
+              <%= flash.errors.email %>       
             </div>
           <% } %>
           <%= lang['views.titleTxt'] %><br>
           <input type="text" name="title"><br><br>
-          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.title) { %>
+          <% if (typeof flash.errors != "undefined" && flash.errors.title) { %>
             <div class="empty-fields">          
-              <%= session.flash.errors.title %>       
+              <%= flash.errors.title %>       
             </div>
           <% } %>
           <%= lang['views.publishArticle.textTxt'] %><br>
           <textarea rows="7" cols="48" name="text"></textarea><br><br>
-          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.text) { %>
+          <% if (typeof flash.errors != "undefined" && flash.errors.text) { %>
             <div class="empty-fields">         
-              <%= session.flash.errors.text %>          
+              <%= flash.errors.text %>          
             </div>
           <% } %>
           <button type="submit"><h3><%= lang['views.publishArticle.postBtnTxt'] %></h3></button>   

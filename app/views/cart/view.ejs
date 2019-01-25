@@ -68,12 +68,12 @@
                         <a href="/products/browse"><%= lang['views.cart.continueShoppingTxt'] %></a>
                     </center>
                 </div>
-                <% if(typeof session.flash.errors != "undefined" && session.flash.errors.finalamount) { %>
+                <% if(typeof flash.errors != "undefined" && flash.errors.finalamount) { %>
                     <div class="confirmTheOrder">
                         <a href="/cart/view"><%= lang['views.cart.sendingOrderTxt'] %></a>
                     </div>
                     <div class="not-enough-money">
-                        <%= session.flash.errors.finalamount %>
+                        <%= flash.errors.finalamount %>
                         <br><h3><a href="/cart/view"><%= lang['views.okTxt'] %></a></h3>
                     </div>
                 <% } else { %>

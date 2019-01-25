@@ -19,7 +19,7 @@
     <div class="message-box">   
         <div class="text-box">        
             <form method="post" action="/chat/send/<%= session.user._id %>">
-                <input type="text" name="text" value="<% if(session.flash) { %><%= session.flash.text %><% } %>" autofocus style="width:304px; height:26px;">                           
+                <input type="text" name="text" value="<% if(flash) { %><%= flash.text %><% } %>" autofocus style="width:304px; height:26px;">                           
                 <input type="submit" value="<%= lang['views.chat.sendMessageTxt'] %>" style="width:67px; height:26px;">
             </form>
         </div>
@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="no-text">
-        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.text) { %>
-            <%= session.flash.errors.text %>
+        <% if(typeof flash.errors != "undefined" && flash.errors.text) { %>
+            <%= flash.errors.text %>
         <% } %>  
     </div>       
   </div>

@@ -2,13 +2,13 @@
 <div class="siteContent">
     <div class="ex3"> 
         <div class="success-search">
-            <% if(typeof session.flash.success != "undefined" && session.flash.success.search) { %>
+            <% if(typeof flash.success != "undefined" && flash.success.search) { %>
                 <div class="">
-                    <%= lang['success.search.result'] %> <%= session.flash.success.search %>
+                    <%= lang['success.search.result'] %> <%= flash.success.search %>
                 </div>
             <% } %>
         </div>
-        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.search) { %>
+        <% if(typeof flash.errors != "undefined" && flash.errors.search) { %>
             <div class="searchResult">
                 <%= lang['errors.search.noResult'] %>
             </div>

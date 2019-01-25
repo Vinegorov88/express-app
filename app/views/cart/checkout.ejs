@@ -9,44 +9,44 @@
                     </center>
                     <%= lang['views.nameTxt'] %><br>
                     <input type="text" name="name" placeholder="" autofocus><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.name) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.name) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.name %>
+                            <%= flash.errors.name %>
                         </div>      
                     <% } %>
                     <%= lang['views.fathersnameTxt'] %><br>
                     <input type="text" name="surname" placeholder=""><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.surname) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.surname) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.surname %>
+                            <%= flash.errors.surname %>
                         </div>      
                     <% } %>
                     <%= lang['views.surnameTxt'] %><br>
                     <input type="text" name="fathersname" placeholder=""><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.fathersname) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.fathersname) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.fathersname %>
+                            <%= flash.errors.fathersname %>
                         </div>      
                     <% } %>
                     <%= lang['views.phoneTxt'] %><br>
                     <input type="text" name="phone" placeholder=""><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.phone) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.phone) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.phone %>
+                            <%= flash.errors.phone %>
                         </div>      
                     <% } %>
                     <%= lang['views.townTxt'] %><br>
                     <input type="text" name="town" placeholder =""><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.town) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.town) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.town %>
+                            <%= flash.errors.town %>
                         </div>      
                     <% } %>
                     <%= lang['views.cart.adressOrCourierTxt'] %><br>
                     <input type="text" name="address" placeholder =""><br><br>
-                    <% if(typeof session.flash.errors != "undefined" && session.flash.errors.address) { %>
+                    <% if(typeof flash.errors != "undefined" && flash.errors.address) { %>
                         <div class="empty-fields">
-                            <%= session.flash.errors.address %>
+                            <%= flash.errors.address %>
                         </div>      
                     <% } %>
                     <button type="submit"><h2><%= lang['views.cart.orderBtnTxt'] %></h2></button>

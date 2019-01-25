@@ -46,11 +46,11 @@ module.exports.search = function(req, res){
             if(!articles.length) errors.search = req.lang["errors.search.noResult"]
 
             if(Object.keys(errors).length != 0) {
-                req.session.flash.errors = errors;
+                req.flash.errors = errors;
                 return res.render('pages/search');
             }
             success.search = req.body.query
-            req.session.flash.success = success;
+            req.flash.success = success;
             
             return res.render('pages/query', {articles: articles});
         });

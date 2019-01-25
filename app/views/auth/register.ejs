@@ -8,87 +8,87 @@
         </div><br><br>
         <%= lang['views.usernameTxt'] %><br>   
           <input type="text" name="username" autofocus><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.username) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.username) { %>
             <div class="username-exists">
-              <%= session.flash.errors.username %>
+              <%= flash.errors.username %>
             </div>
-          <% } else if(typeof session.flash.errors != "undefined" && session.flash.success.username) { %>
+          <% } else if(typeof flash.errors != "undefined" && flash.success.username) { %>
             <div class="username-free">
-                <%= session.flash.success.username %>
+                <%= flash.success.username %>
             </div>
-          <% } else if(typeof session.flash.errors != "undefined" && session.flash.erorrs.username){ %>
-            <%= session.flash.errors.username %>
+          <% } else if(typeof flash.errors != "undefined" && flash.erorrs.username){ %>
+            <%= flash.errors.username %>
           <% } %>
           <br>
           <%= lang['views.passwordTxt'] %><br>
           <input type="password" name="password"><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.password) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.password) { %>
             <div class="small-password">     
-              <%= session.flash.errors.password %>    
+              <%= flash.errors.password %>    
             </div>
           <% } %>
           <br>
           <%= lang['views.register.repeadPasswordTxt'] %><br>
           <input type="password" name="repeatPassword">
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.repeatPassword) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.repeatPassword) { %>
             <div class="password-mismatch">        
-              <%= session.flash.errors.repeatPassword %>       
+              <%= flash.errors.repeatPassword %>       
             </div>
           <% } %>
           <br><br>
           <%= lang['views.nameTxt'] %><br>
           <input type="text" name="name" placeholder="">
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.name) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.name) { %>
             <div class="isMissingName">   
-              <%= session.flash.errors.name %>  
+              <%= flash.errors.name %>  
             </div>
           <% } %>
           <br><br>
           <%= lang['views.surnameTxt'] %><br>
           <input type="text" name="fathersname">
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.fathersname) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.fathersname) { %>
             <div class="isMissingFathersname">           
-              <%= session.flash.errors.fathersname %>            
+              <%= flash.errors.fathersname %>            
             </div>
           <% } %>
           <br><br>
           <%= lang['views.register.egnTxt'] %><br>
           <input type="text" name="egn">
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.egn) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.egn) { %>
             <div class="isMissingEgn">        
-              <%= session.flash.errors.egn %>           
+              <%= flash.errors.egn %>           
             </div>
           <% } %>
           <br><br>
           <%= lang['views.townTxt'] %><br>
           <input type="text" name="town"><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.town) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.town) { %>
             <div class="isMissingTown">        
-              <%= session.flash.errors.town %>        
+              <%= flash.errors.town %>        
             </div>
           <% } %>
           <br>
           <%= lang['views.register.streetTxt'] %><br>
           <input type="text" name="street"><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.street) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.street) { %>
             <div class="isMissingStreet">           
-              <%= session.flash.errors.street %>         
+              <%= flash.errors.street %>         
             </div>
           <% } %>
           <br>
           <%= lang['views.previousJobTxt'] %><br>
           <input type="text" name="previousJob"><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.previousJob) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.previousJob) { %>
             <div class="isMissingPreviousJob">         
-              <%= session.flash.errors.previousJob %>          
+              <%= flash.errors.previousJob %>          
             </div>
           <% } %>
           <br>
           <%= lang['views.worksAsTxt'] %><br>
           <input type="text" name="worksAs"><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.worksAs) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.worksAs) { %>
             <div class="isMissingWorksAs">        
-              <%= session.flash.errors.worksAs %>      
+              <%= flash.errors.worksAs %>      
             </div>
           <% } %>
           <br>

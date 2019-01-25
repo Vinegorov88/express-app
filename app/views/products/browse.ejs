@@ -6,9 +6,9 @@
                 <h5><%= lang['views.products.addedProductsTxt'] %></h5>
                 </p><small><%= Object.keys(session.cart).length %> <%= lang['views.products.numberProdutcsTxt'] %></small></p>      
             </div>
-            <% if(typeof session.flash.errors != "undefined" && session.flash.errors.insufficientAmount) { %>
+            <% if(typeof flash.errors != "undefined" && flash.errors.insufficientAmount) { %>
                 <div class="insufficientAmount">
-                    <%= session.flash.errors.insufficientAmount %>
+                    <%= flash.errors.insufficientAmount %>
                 </div>
             <% } %>         
             <a href="/cart/view" class="hover-text">

@@ -18,17 +18,17 @@
           <input type="hidden" name="articleId" value="<%= article._id %>"></p><br>
           <p><%= lang['views.nameTxt'] %>*</p>
           <input type="text" name="author" style="width:606px;" <% if(session.user) { %> value="<%= session.user.username %>"><% } %><br>
-          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.author) { %>
+          <% if(typeof flash.errors != "undefined" && flash.errors.author) { %>
             <div class="empty-fields-author">
-              <%= session.flash.errors.author %>
+              <%= flash.errors.author %>
             </div> 
           <% } %>
           <p><%= lang['views.articles.inputCommentTxt'] %></p>
           <textarea rows="10" cols="74" name="comment" autofocus></textarea><br><br>
           <input type="submit" value="<%= lang['views.articles.publishingBtnTxt'] %>" style="width:105px; height: 22px;">
-          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.comment) { %>
+          <% if (typeof flash.errors != "undefined" && flash.errors.comment) { %>
             <div class="empty-fields-comment">
-              <%= session.flash.errors.comment %>
+              <%= flash.errors.comment %>
            </div>
           <% } %>
         </form><br><br>
