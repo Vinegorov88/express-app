@@ -1,0 +1,13 @@
+body{
+    background-image: url('https://pp.userapi.com/c841122/v841122831/327e/nHt-92F6yc4.jpg');
+}
+
+#fof{display:block; width:100%; margin:100px 0; line-height:1.6em; text-align:center;}
+#fof .hgroup{text-transform:uppercase;}
+#fof .hgroup h1{margin-bottom:25px; font-size:80px;}
+#fof .hgroup h1 span{display:inline-block; margin-left:5px; padding:2px; overflow:hidden;}
+#fof .hgroup h1 span strong{display:inline-block; padding:18px 20px 20px; font-weight:normal;}
+#fof .hgroup h2{font-size:50px; margin-bottom: 29px;}
+#fof .hgroup h2 span{display:block; font-size:18px; margin-top: 40px;}
+#fof p{margin:25px 0 0 0; padding:0; font-size:16px;}
+#fof p:first-child{margin-top:0;}

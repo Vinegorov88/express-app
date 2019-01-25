@@ -1,0 +1,50 @@
+<%- include('../includes/header')%>
+<div class="siteContentUser">
+  <div class="ex3">
+    <div class="div-profile">
+      <div class="profile-user-info">
+        <img src="/uploads/images/<%= session.user.photowall %>" style="width:648px; height: 248px; border-radius: 0%; "alt="Image"/>
+        <div class="user-name">
+          <%= session.user.name %> <%= session.user.fathersname %><br>
+          (<%= session.user.username %>)<br>
+          ()
+        </div>
+        <div class="nav-line">         
+          <div class="photoContainer">
+            <img src="/uploads/images/<%= session.user.image %>" style="width:150px; height: 150px; border-radius:75%; border: 3px solid #fff;"alt="Image"/>
+          </div>
+          <div class="button_dnevnik">
+            <a href="/profile/show" title="">
+              <img src="/uploads/images/button_dnevnik.jpg" style="width:92px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_invite">
+            <a href="/profile/invitations" title="">
+              <img src="/uploads/images/button_pokani.jpg" style="width:84px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_friends">
+            <a href="/profile/friends" title="">
+              <img src="/uploads/images/button_priyateli.jpg" style="width:96px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_photos">
+            <a href="/profile/photos" title="">
+              <img src="/uploads/images/button_snimki.jpg" style="width:84px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_more">
+            <a href="/profile/more" title="">
+              <img src="/uploads/images/button_oshhe.jpg" style="width:60px; height:30px;" alt="Image"/>
+            </a>
+          </div> 
+        </div>
+        <br>
+      </div>
+        <% if (typeof section !== 'undefined') { %>
+          <%- include('./sections/' + section) %>
+        <% } %>
+    </div>
+  </div> 
+</div>
+<%- include('../includes/footer') %>

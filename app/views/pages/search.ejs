@@ -1,0 +1,51 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+    <div class="ex3">
+        <div class="search">
+            <form action="/pages/search" method="GET" id="search">
+                <label><%= lang['views.search.infoTxt'] %> </label>
+                <input type="text" name="query" autofocus  value="" placeholder="<%= lang['views.search.inputInfoTxt'] %>"><br><br>
+                <% if(typeof session.flash.errors != "undefined" && session.flash.errors.query) { %>
+                    <div class="query-exists">        
+                        <%= session.flash.errors.query %>
+                    </div>
+                <% } %>
+                <button type="submit"><h3><%= lang['views.search.nameBtn'] %></h3></button>
+            </form>
+        </div>
+
+        <div class="success-search">
+            <% if(req.query.query) { %>
+                <div class="">
+                    <%= lang['success.search.result'] %> <%= req.query.query %>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="div-search-result">
+            <% if (typeof articles != "undefined" ) { %>
+                <% articles.forEach(function(article) { %>
+                    <div class="info-article">
+                        <a href="/articles/show/<%= article.slug %>/<%= article._id %>"><br>
+                            <%= lang['views.articles.postedTxt'] %> <%= article.name %><br>
+                            <%= lang['views.titleTxt'] %> <%= article.title %><br><br>
+                        </a>
+                        <p>
+                            <h6>
+                            <%= lang['views.articles.addedArticleTxt'] %> <%= article.date %><br>
+                            <%= lang['views.articles.visitedArticleTxt'] %> <%= article.views %> <%= lang['views.timesTxt'] %> 
+                            </h6>
+                        </p>         
+                        <div class="buttonDelete">
+                            <a href="/articles/delete/<%= article._id %>"><%= lang['views.articles.deleteArticleTxt'] %></a><br><br><br>
+                        </div>
+                        <div class="buttonComment">
+                            <a href="/articles/show/<%= article.slug %>/<%= article._id %>"><%= lang['views.articles.commentArticleTxt'] %></a><br><br><br>
+                        </div>
+                    </div>    
+                <% }); %>  
+            <% } %> 
+        </div>
+    </div>
+</div>
+<%- include('../includes/footer') %>

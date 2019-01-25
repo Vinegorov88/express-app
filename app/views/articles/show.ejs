@@ -1,0 +1,59 @@
+<%- include('../includes/header')%>
+<div class="siteContent">
+  <div class="ex3">
+    <center>
+      <div class="resultArticle">
+        <h3><%= lang['views.articles.postedTxt'] %> <%= article.name %></h3><br>
+        <h5><%= lang['views.emailTxt'] %> <%= article.email %><br></h5>
+        <h5><%= lang['views.titleTxt'] %> <%= article.title %><br><br><br></h5>
+        <h5><%= lang['views.articles.opinionTxt'] %> <%= article.text %><br><br></h5>
+      </div>
+    </center>
+    <div class="titleComment">
+      <h5><%= lang['views.articles.yourCommentTxt'] %></h5><br>
+    </div>
+    <div class="Forum">
+        <form method="post" action="/articles/publishComment">
+          <p><%= lang['views.titleTxt'] %> <%= article.title %>
+          <input type="hidden" name="articleId" value="<%= article._id %>"></p><br>
+          <p><%= lang['views.nameTxt'] %>*</p>
+          <input type="text" name="author" style="width:606px;" <% if(session.user) { %> value="<%= session.user.username %>"><% } %><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.author) { %>
+            <div class="empty-fields-author">
+              <%= session.flash.errors.author %>
+            </div> 
+          <% } %>
+          <p><%= lang['views.articles.inputCommentTxt'] %></p>
+          <textarea rows="10" cols="74" name="comment" autofocus></textarea><br><br>
+          <input type="submit" value="<%= lang['views.articles.publishingBtnTxt'] %>" style="width:105px; height: 22px;">
+          <% if (typeof session.flash.errors != "undefined" && session.flash.errors.comment) { %>
+            <div class="empty-fields-comment">
+              <%= session.flash.errors.comment %>
+           </div>
+          <% } %>
+        </form><br><br>
+        <% if (comments.length) { %>
+          <p><h3><%= comments.length %> <%= lang['views.articles.numberОfCommentsTxt'] %></h3></p><br><br>
+          <% comments.forEach(function(comment) { %>
+            <div class="comment">
+              <p>
+                <%= lang['views.articles.commentedTxt'] %> <%= comment.author %><br>
+                <%= lang['views.articles.inputCommentTxt'] %> <%= comment.comment %><br>
+                <%= lang['views.articles.likesTxt'] %> <%= comment.likeIps.length %><br>
+              </p>          
+              <div class="likeButton">
+                <a href="/articles/comment/<%= comment._id %>">             
+                  <img src="/uploads/images/like-button-png-2.png" style="width:24px; height: 24px;" alt="Image"/>        
+                </a>     
+              </div><br><br>             
+            </div>
+          <% }); %>
+        <% } else { %>
+          <div class="noComment">
+            <p><h3><%= comments.length %> <%= lang['views.articles.numberОfCommentsTxt'] %></h3></p>
+          </div>
+        <% } %>
+    </div>
+  </div> 
+</div>
+<%- include('../includes/footer') %>

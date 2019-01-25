@@ -1,0 +1,96 @@
+<%- include('../includes/header') %>
+<div class="siteContentt">
+    <div class="ex4">
+        <% if (Object.keys(session.cart).length) { %>
+            <div class="cart-table-wrapper">
+                <% total = 0 %>
+                <% discount = 0 %>
+                <% for(let i in session.cart) { %>
+                    <% total += session.cart[i].price * session.cart[i].quantity %>
+                    <% if(session.cart[i].quantity >= 10) { %>
+                        <% discount += session.cart[i].discount %>
+                    <% } %>
+                    <br>
+                    <h2 class="product-name">
+                        <div class="picture">
+                            <img src="/uploads/images/<%= session.cart[i].image %>" style="width:130px; height: 86px;" alt="Image"/>          
+                        </div>   
+                    </h2>
+                    <div class="info_product">
+                        <%= session.cart[i].info %>    
+                    </div>
+                    <div class="vertical-line-first">
+                        <hr width="1" size="114"></hr>
+                    </div>
+                    <div class="retail-price">      
+                        <%= lang['views.cart.retailPriceTxt'] %><br><br>               
+                        <span class='font-weight-normal'><%= session.cart[i].retailPrice %> <%= lang['views.currency'] %></span>               
+                    </div>
+                    <div class="wholesale-price">      
+                        <%= lang['views.cart.wholesalePriceTxt'] %><br><br>
+                        <span class='font-weight-normal'><%= Math.round(session.cart[i].wholesalePrice * 100) / 100 %> <%= lang['views.currency'] %></span>                  
+                    </div>
+                    <div class="vertical-line">
+                        <hr width="1" size="114"></hr>
+                    </div>
+                    <div class="quantity-product">
+                        <span class="cell-label"><%= lang['views.quantity'] %></span><br><br>
+                        <form method="post" action="/cart/update/<%= session.cart[i]._id %>">
+                            <input name="quantity" value="<%= session.cart[i].quantity %>" size="4" title="<%= lang['views.quantity'] %>" class="input-text-qty" maxlength="12">
+                        </form>                       
+                    </div>
+                    <div class="vertical-line-2">
+                        <hr width="1" size="114"></hr>
+                    </div>
+                    <div class="amount">
+                        <span class="cell-label"><%= lang['views.cart.amountTxt'] %></span><br><br>
+                        <span class='font-weight-normal'><%= Math.round((session.cart[i].quantity * session.cart[i].retailPrice) * 100) / 100 %> <%= lang['views.currency'] %></span>
+                    </div>
+                    <div class="vertical-line-3">
+                        <hr width="1" size="114"></hr>
+                    </div>            
+                    <div class="remove-product">
+                        <a href="/cart/delete/<%= session.cart[i]._id %>" title="<%= lang['views.cart.removeProductTxt'] %>" class="btn-remove btn-remove2">
+                            <img src="/uploads/images/button_x.jpg" style="width:18px; height: 18px;" alt="Image"/>
+                        </a>                       
+                    </div>
+                    <div class="vertical-line-4">
+                        <hr width="1" size="114"></hr>
+                    </div><br><hr><br><br><br><br><br><hr><br><br>                                             
+                <% } %>        
+                <div class="result-sum">
+                    <div class="totalSum"><%= lang['views.cart.amountTxt'] %> <%= Math.round(total * 100) / 100 %> <%= lang['views.currency'] %></div>   
+                    <div class="discount-price"><%= lang['views.cart.discountPriceTxt'] %> <% if(discount > 0) { %><%= Math.round(discount * 100) / 100 %><%= lang['views.currency'] %><% } else { %> 0 <%= lang['views.currency'] %><% } %></div>
+                    <div class="finalamount"><%= lang['views.cart.finalAmountTxt'] %> <%= Math.round((total - discount) * 100 ) / 100 %> <%= lang['views.currency'] %></div>
+                </div>       
+                <div class="buttonShopping">
+                    <center>
+                        <a href="/products/browse"><%= lang['views.cart.continueShoppingTxt'] %></a>
+                    </center>
+                </div>
+                <% if(typeof session.flash.errors != "undefined" && session.flash.errors.finalamount) { %>
+                    <div class="confirmTheOrder">
+                        <a href="/cart/view"><%= lang['views.cart.sendingOrderTxt'] %></a>
+                    </div>
+                    <div class="not-enough-money">
+                        <%= session.flash.errors.finalamount %>
+                        <br><h3><a href="/cart/view"><%= lang['views.okTxt'] %></a></h3>
+                    </div>
+                <% } else { %>
+                    <div class="confirmTheOrder">
+                        <a href="/cart/checkout"><%= lang['views.cart.sendingOrderTxt'] %></a>
+                    </div>
+                <% } %>  
+            </div> 
+         </div>                                                                       
+        <% } else { %>
+        <div class="empty-cart">
+            <h3><%= lang['views.cart.cartEmptyTxt'] %></h3>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">        
+            <div class="back-button">
+                <a href="/products/browse"><i class="fas fa-undo"></i></a>
+            </div>          
+        </div>
+    <% } %>
+</div>
+<%- include('../includes/footer') %>

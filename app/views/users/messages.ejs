@@ -1,0 +1,130 @@
+<%- include('../includes/header')%>
+<div class="siteContentUser">
+  <div class="ex3">
+    <div class="div-profile">
+      <div class="profile-user-info">
+        <img src="/uploads/images/<%= user.photowall %>" style="width:648px; height: 248px; border-radius: 0%; "alt="Image"/>
+        <div class="user-name">
+          <% let status %>
+          <% if (user.active == 1) { %>
+            <% status = "Деактивирай" %>
+          <% } else { %>
+            <% status = "Активирай" %>
+          <% } %>
+          <%= user.name %> <%= user.fathersname %><br>
+          (<%= user.username %>)<br>
+          ()
+        </div>
+        <div class="nav-line">         
+          <div class="photoContainer">
+            <img src="/uploads/images/<%= user.image %>" style="width:150px; height: 150px; border-radius:75%; border: 3px solid #fff;"alt="Image"/>
+          </div>
+          <div class="button_dnevnik">
+            <a href="/users/show/<%= user.username %>" title="">
+              <img src="/uploads/images/button_dnevnik.jpg" style="width:92px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_photos_user">
+            <a href="/users/photos/<%= user.username %>" title="">
+              <img src="/uploads/images/button_snimki.jpg" style="width:84px; height:30px;" alt="Image"/>
+            </a>
+          </div>
+          <div class="button_more_user">
+            <a href="/users/more" title="">
+              <img src="/uploads/images/button_oshhe.jpg" style="width:60px; height:30px;" alt="Image"/>
+            </a>
+          </div> 
+          <% if (session.user._id != user._id) { %>
+            <% let followBtnText = (session.user.followedUsers.includes(user._id.toString())) ? 'Последванo' : 'Последванe' %>
+            <% let friendBtnText = (user.friendRequest.includes(session.user._id.toString())) ? 'Поканата е изпратена' : 'Добавяне на приятел' %>
+            <% if (session.user.friends.includes(user._id.toString()))  { %>
+              <div class="buttonFriend">   
+                  <form method="post" action="">                           
+                    <input type="submit" value="Приятели" style="width:100px; height:20px;">
+                  </form>
+              </div>
+              <div class="buttonFollowed">   
+                  <form method="post" action="">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="<%= followBtnText %>" style="width:100px; height:20px;">
+                  </form>
+              </div>
+              <div class="buttonMessage">
+                <a href="/users/messages/<%= user.username %>">
+                  <img src="/uploads/images/button_sobshhenie.png" style="width:100px; height: 20px;" alt="Image"/>
+                </a>
+              </div>
+              <div class="buttonBlockSessionUser">
+                <form method="post" action="/users/block/<%= user._id %>">
+                  <input type="hidden" name="userId" value="<%= user._id %>">                            
+                  <input type="submit" value="Блокирай" style="width:101px; height:20px;">
+                </form>
+              </div>
+              <% if (session.user.username == "vladko886") { %> 
+                <div class="buttonBan">
+                  <form method="post" action="/users/ban/<%= user._id %>">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="<%= status %>" style="width:100px; height:20px;">
+                  </form>
+                </div>
+                <div class="buttonBlockD">
+                  <form method="post" action="/users/block/<%= user._id %>">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="Блокирай" style="width:101px; height:20px;">
+                  </form>
+                </div> 
+              <% } %>          
+            <% } else { %>
+              <div class="buttonFriendship">   
+                <form method="post" action="/users/send/<%= user._id %>">
+                  <input type="hidden" name="UserID" value="<%= user._id %>">                            
+                  <input type="submit" value="<%= friendBtnText %>" style="width:202px; height:20px;">
+                </form>
+              </div>   
+              <div class="buttonFollowed">   
+                <form method="post" action="/users/follow/<%= user._id %>">
+                  <input type="hidden" name="userId" value="<%= user._id %>">                            
+                  <input type="submit" value="<%= followBtnText %>" style="width:100px; height:20px;">
+                </form>
+              </div>
+              <div class="buttonMessage">
+                <a href="/users/messages/<%= user.username %>">
+                  <img src="/uploads/images/button_sobshhenie.png" style="width:100px; height: 20px;" alt="Image"/>
+                </a>
+              </div>
+              <div class="buttonBlockSessionUser">
+                <form method="post" action="/users/block/<%= user._id %>">
+                  <input type="hidden" name="userId" value="<%= user._id %>">                            
+                  <input type="submit" value="Блокирай" style="width:101px; height:20px;">
+                </form>
+              </div>
+              <% if (session.user.username == "vladko886") { %> 
+                <div class="buttonBan">
+                  <form method="post" action="/users/ban/<%= user._id %>">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="<%= status %>" style="width:100px; height:20px;">
+                  </form>
+                </div>
+                <div class="buttonBlockD">
+                  <form method="post" action="/users/block/<%= user._id %>">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="Блокирай" style="width:101px; height:20px;">
+                  </form>
+                </div> 
+              <% } %>  
+            <% } %>
+          <% } %>          
+        </div>
+        <br>
+        <div class="div-sendMessage">
+          <form method="post" action="/users/messages">
+            <input type="hidden" name="UserIDD" value="<%= user._id %>"> 
+            <input type="text" name="message" autofocus style="height: 35px;">
+            <button type="submit"><h3>Изпрати</h3></button>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div> 
+</div>
+<%- include('../includes/footer') %>

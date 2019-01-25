@@ -1,0 +1,21 @@
+<div class="my-friends">
+    <img src="/uploads/images/6Umpm6yvtbH.png" style="width:18px; height:18px;" alt="Image"/> <%= lang['views.profile.allFriendsTxt'] %> <%= session.user.friends.length %>
+</div>
+<div class="my-friends-info"> 
+  <% friends.forEach(function(user) { %>
+    <div class="my-friend-div">
+      <div class="my-friend">
+        <a href="/users/show/<%= user.username %>" title="<%= lang['views.viewProfileTxt'] %>">
+          <img src="/uploads/images/<%= user.image%>" style="width:73px; height:73px;" alt="Image"/>
+        </a>
+      </div><br><br><br>
+      <div class="username-friend">
+        <center>
+          <a href="/users/show/<%= user.username %>" title="<%= lang['views.viewProfileTxt'] %>">
+            <%= user.username %>
+          </a>
+        </center>
+      </div>
+    </div>
+  <% }); %>
+</div>

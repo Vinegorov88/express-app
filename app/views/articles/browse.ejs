@@ -1,0 +1,39 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+  <div class="ex3-articles">
+    <% if (articles.length > 0) { %>
+      <div class="title-published-articles">
+        <%= lang['views.articles.titlePageTxt'] %>
+      </div>
+      <div class="browseArticle"> 
+        <% articles.forEach(function(article) { %><br>
+          <div class="oneArticle">
+            <a href="/articles/show/<%= article.slug %>/<%= article._id %>"><br>
+              <%= lang['views.articles.postedTxt'] %> <%= article.name %><br>
+              <%= lang['views.titleTxt'] %> <%= article.title %><br><br>
+            </a>
+            <p>
+              <h6>
+                <%= lang['views.articles.addedArticleTxt'] %> <%= article.date %><br>
+                <%= lang['views.articles.visitedArticleTxt'] %> <%= article.views %> <%= lang['views.timesTxt'] %> 
+              </h6>
+            </p>         
+            <div class="buttonDelete">
+              <a href="/articles/delete/<%= article._id %>"><%= lang['views.articles.deleteArticleTxt'] %></a><br><br><br>
+            </div>
+            <div class="buttonComment">
+              <a href="/articles/show/<%= article.slug %>/<%= article._id %>"><%= lang['views.articles.commentArticleTxt'] %></a><br><br><br>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <% } else { %><br><br><br>
+        <div class="browse">
+          <div class="ex3">
+            <h2><%= lang['views.articles.noPublishedArticlesTxt'] %></h2>
+          </div>
+        </div>
+      <% } %>  
+  </div> 
+</div>
+<%- include('../includes/footer') %>

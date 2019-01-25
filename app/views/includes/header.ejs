@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="utf-8"></meta>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css"/>
+  </head>
+  <body>
+    <div class="rightBanner">
+      <img src="https://previews.123rf.com/images/gonin/gonin1506/gonin150600450/41668286-abstract-blue-white-geometrical-web-background.jpg" style="width: 236px; height: 573px;" alt="Image"/>
+    </div>
+    <div class="leftBanner">      
+      <img src="https://previews.123rf.com/images/gonin/gonin1506/gonin150600450/41668286-abstract-blue-white-geometrical-web-background.jpg" style="width: 236px; height: 573px;" alt="Image"/>
+    </div>
+    <nav>
+      <div class="aboveNav">
+        <img src="/uploads/images/.jpg" alt="" height="235" width="1346"/>
+      </div>
+      <div class="nav">
+          <div class="bg-flag">        
+            <a href="/change/language/bg" title="BG">
+              <img src="/uploads/images/BG-flag.png" style="width:20px; height: 18px;"/>
+            </a>
+          </div> 
+          <div class="uk-flag" title="EN">       
+            <a href="/change/language/en">
+              <img src="/uploads/images/UK-flag.png" style="width:20px; height: 18px;"/>
+            </a>
+          </div>
+        <div class="welcome">
+          <a href="/"><%= lang['views.nav.homeBtn'] %></a>
+        </div>
+        <% if (typeof session.user != "undefined") { %> 
+          <div class="login">
+            <a href="/profile/show"><%= session.user.username %></a>
+          </div>          
+          <div class="loginLogout">
+            <a href="/auth/logout"><%= lang['views.nav.logoutBtn'] %></a>
+          </div>
+          <div class="browseArticlesIsLoggedUser">
+            <a href="/articles/browse"><%= lang['views.nav.articlesBtn'] %></a>
+          </div>
+          <div class="publishArticles">
+              <a href="/articles/publish"><%= lang['views.nav.publishArticlesBtn'] %></a>
+          </div>
+          <div class="chatroomLinkIsLoggedUser">
+            <a href="/chat/chatroom"><%= lang['views.nav.chatroomBtn'] %></a>
+          </div>
+          <div class="productsIsLoggedUser">
+            <a href="/products/browse"><%= lang['views.nav.productsBtn'] %></a>
+          </div>
+        <% } else { %>
+          <div class="login">
+            <a href="/auth/login"><%= lang['views.nav.loginBtn'] %></a>
+          </div>
+          <div class="browseArticles">
+            <a href="/articles/browse"><%= lang['views.nav.articlesBtn'] %></a>
+          </div>
+          <div class="registerLink">
+            <a href="/auth/register"><%= lang['views.nav.registerBtn'] %></a>
+          </div>
+          <div class="products">
+            <a href="/products/browse"><%= lang['views.nav.productsBtn'] %></a>
+          </div>
+          <div class="chatroomLink">
+            <a href="/chat/chatroom"><%= lang['views.nav.chatroomBtn'] %></a>
+          </div>  
+        <% } %>       
+          <div class="usersLink">
+            <a href="/users/browse"><%= lang['views.nav.usersBtn'] %></a>
+          </div>  
+          <div class="searchBtn">
+            <a href="/pages/search"><%= lang['views.nav.searchBtn'] %></a>
+          </div>
+          <div class="contactUsLink">
+            <a href="/pages/contactUs"><%= lang['views.nav.contactUsBtn'] %></a>
+          </div>
+      </div>
+    </nav>
+  

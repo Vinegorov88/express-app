@@ -1,0 +1,31 @@
+<% if(session.user.friendRequest.length) { %>
+    <div class="friend-requests"> 
+        <div class="friend-requests-text">
+            <%= lang['views.profile.friendRequestTxt'] %>
+        </div><br><br>
+        <% friendRequest.forEach(function(user) { %>
+            <%= user.name %><br>
+            <div class="buttonFriendship-receive">  
+                <form method="post" action="/profile/add/<%= user._id %>">
+                    <input type="hidden" name="userId" value="<%= user._id %>">                            
+                    <input type="submit" value="<%= lang['views.profile.acceptInvitationBtnTxt']%>" style="width:120px; height:20px;">
+                </form>
+            </div><br>
+            <div class="buttonFriendship-removal"> 
+                <form method="post" action="/profile/remove/<%= user._id %>">
+                    <input type="hidden" name="userID" value="<%= user._id %>">                            
+                    <input type="submit" value="<%= lang['views.profile.removeInvitationBtnTxt'] %>" style="width:100px; height:20px;">
+                </form>
+            </div> 
+        <% }); %> 
+    </div>  
+<% } else { %>
+    <div class="no-invitations">
+        <br>
+        <center>
+            <h3>
+                <%= lang['views.profile.noInvitationsTxt'] %>
+            </h3>
+        </center>
+    </div>
+<% } %>    

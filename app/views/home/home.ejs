@@ -1,0 +1,106 @@
+<%- include('../includes/header') %>
+<div class="siteContentHome">
+  <div class="ex3">
+    <div class="menuCheck">
+      <div class="news">
+        <div class="PicInNews">
+          <img src='https://t3.ftcdn.net/jpg/02/08/75/68/240_F_208756852_BU48DYcVQ2NUTx3RSwRDZRP2xFLp8tvA.jpg' style="width:864px; height: 137px;" alt="Image"/>       
+        </div>
+        <div class="vicove">
+          <div class="title-vicove">
+            <img src="/uploads/images/button_vicove.png" alt="Image"/>
+          </div>
+          <div class="vic-1">
+            &bull; Тежко им е на програмистите. Отиват на гости в някаква къща и веднага им показват домашния компютър и ги молят да му оправи проблемите.
+            Затова си избрах да стана гинеколог.
+          </div>
+          <div class="vic-2">
+            &bull; Попитали един мъдър лекар:<br>
+            - Какво е да си здрав?<br>
+            Той отговорил:<br>
+            - Това е всеки ден да те боли на различно място...
+          </div>
+          <div class="vic-3">
+            &bull; Кръчмата клиент пита барманката:<br>
+            - Муцка, ракията хубава ли е?<br>
+            - Хубава е... като мене...<br>
+            - Я дай една бира по-добре...
+          </div>
+        </div>
+        <div class="commented-аrticles">
+          <div class="title-commented-articles">
+            <img src="/uploads/images/naj-poseshhavani-statii.png" alt="Image"/>
+          </div><br>
+          <div class="window-comments">
+            <% articles.forEach(function(article) { %>
+              <% if (article.views >= 5 && article.views <= 10000) { %>
+                <a href="/articles/show/<%= article.slug %>/<%= article._id %>">
+                  <div class="article-homepage">        
+                    &bull; <%= lang['views.titleTxt'] %> <%= article.title %><br>         
+                  </div>
+                </a>
+                <div class="seen-articletxt">
+                  <%= lang['views.home.viewsArticlesTxt'] %> <%= article.views %> <%= lang['views.timesTxt'] %><br><br>
+                </div>              
+              <% } %>
+            <% }); %>
+          </div>
+        </div>
+        <div class="div-top-users">
+          <div class="title-top-users">
+            <img src="/uploads/images/top-potrebiteli.png" alt="Image"/>
+          </div>
+          <div class="title-user">
+            <%= lang['views.home.userTxt'] %><hr>
+          </div>
+          <div class="title-comments">
+            <%= lang['views.home.commentsTotalTxt'] %><hr>
+          </div>
+          <div class="top-users"> 
+            <% users.forEach(function(user) { %>
+              <% if (user.comments >= 1 && user.comments <= 10000) { %>
+              <hr><div class="pic-top-user">
+                <img src="/uploads/images/<%= user.image %>" style="width:45px; height: 45px;" alt="Image"/>
+                </div><hr><br><br>
+                <div class="top-user-username">
+                <%= user.username %>
+                  <% if(user.isOnline == "1") { %>
+                    <div class="userOnline">
+                      <h6><%= lang['views.onlineTxt'] %></h6>
+                    </div> 
+                  <% } else { %>
+                    <div class="userOffline">
+                      <h6><%= lang['views.offlineTxt'] %></h6>
+                    </div>
+                  <% } %>
+                </div>
+                <div class="user-comments-number">
+                  <%= user.comments %>
+                </div>  
+              <% } %>               
+            <% }); %> 
+          </div>
+        </div>
+        <div class="banners">
+          <div class="kaprizen-banner">
+              <a href="http://kaprizen.com">
+                <img src="/uploads/images/DeepinScreenshot_select-area_20181212192050.png" style="width:283px; height: 77px;" alt="Image"/>
+              </a>
+          </div>
+          <div class="sinoptik-banner">
+              <a href="https://www.sinoptik.bg/vidin-bulgaria-100725905">
+                <img src="/uploads/images/DeepinScreenshot_select-area_20181212192208.png" style="width:284px; height: 77px;" alt="Image"/>
+              </a>
+          </div> 
+        </div>
+      </div>
+      <div class="users-length">
+        <%= lang['views.home.registeredUsersTxt'] %> <b><%= users.length %></b>
+      </div> 
+      <div class="counter">
+        <%= lang['views.home.totalVisitsTxt'] %> <b><%= counter.counter %></b>
+      </div>   
+    </div>
+  </div>
+</div>
+<%- include('../includes/footer') %>

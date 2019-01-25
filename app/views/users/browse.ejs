@@ -1,0 +1,46 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+    <div class="ex3">
+        <% if (users.length) { %>        
+            <br>
+            <center>
+                <h2><%= lang['views.users.titleTxt'] %></h3>
+            </center>
+            <br>
+            <% users.forEach(function(user) { %>           
+                <div class="picture">     
+                    <img src="/uploads/images/<%= user.image %>" style="width:130px; height: 87px;" alt="Image"/>          
+                    <br>
+                    <center>
+                        <h5><%= user.username %></h5>
+                    </center>
+                    <% if(user.isOnline == "1") { %>
+                        <div class="OnlineTxt">
+                          <h6><%= lang['views.onlineTxt'] %></h6>
+                        </div> 
+                    <% } else { %>
+                        <div class="userTimeout">
+                          <h6><%= lang['views.offlineTxt'] %></h6>
+                        </div>
+                    <% } %>           
+                    <div class="buttonReviewProfile">
+                        <a href="/users/show/<%= user.username %>" title="<%= lang['views.viewProfileTxt'] %>">
+                            <img src="/uploads/images/button_profil.jpg" style="width:75px; height: 22px; border: 1px solid #000000;" alt="Image"/>
+                        </a>
+                    </div>             
+                </div>
+            <% }); %>
+            <% if(typeof session.flash.errors != "undefined" && session.flash.errors.notLogged) { %>
+                <div class="isNotLogged">
+                    <%= session.flash.errors.notLogged %>
+                    <a href="/auth/login" title="<%= lang['views.users.signInTxt'] %>">
+                        <div class="">
+                            <h3><%= lang['views.loginTxt'] %></h3>
+                        </div>
+                    </a>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+</div>
+<%- include('../includes/footer') %>

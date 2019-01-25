@@ -1,0 +1,102 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+  <div class="ex3">
+    <div class="menuCheck">
+      <form method="post" action="" encType="multipart/form-data">
+        <div class="title-registration">
+          <%= lang['views.register.registrationTxt'] %>
+        </div><br><br>
+        <%= lang['views.usernameTxt'] %><br>   
+          <input type="text" name="username" autofocus><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.username) { %>
+            <div class="username-exists">
+              <%= session.flash.errors.username %>
+            </div>
+          <% } else if(typeof session.flash.errors != "undefined" && session.flash.success.username) { %>
+            <div class="username-free">
+                <%= session.flash.success.username %>
+            </div>
+          <% } else if(typeof session.flash.errors != "undefined" && session.flash.erorrs.username){ %>
+            <%= session.flash.errors.username %>
+          <% } %>
+          <br>
+          <%= lang['views.passwordTxt'] %><br>
+          <input type="password" name="password"><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.password) { %>
+            <div class="small-password">     
+              <%= session.flash.errors.password %>    
+            </div>
+          <% } %>
+          <br>
+          <%= lang['views.register.repeadPasswordTxt'] %><br>
+          <input type="password" name="repeatPassword">
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.repeatPassword) { %>
+            <div class="password-mismatch">        
+              <%= session.flash.errors.repeatPassword %>       
+            </div>
+          <% } %>
+          <br><br>
+          <%= lang['views.nameTxt'] %><br>
+          <input type="text" name="name" placeholder="">
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.name) { %>
+            <div class="isMissingName">   
+              <%= session.flash.errors.name %>  
+            </div>
+          <% } %>
+          <br><br>
+          <%= lang['views.surnameTxt'] %><br>
+          <input type="text" name="fathersname">
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.fathersname) { %>
+            <div class="isMissingFathersname">           
+              <%= session.flash.errors.fathersname %>            
+            </div>
+          <% } %>
+          <br><br>
+          <%= lang['views.register.egnTxt'] %><br>
+          <input type="text" name="egn">
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.egn) { %>
+            <div class="isMissingEgn">        
+              <%= session.flash.errors.egn %>           
+            </div>
+          <% } %>
+          <br><br>
+          <%= lang['views.townTxt'] %><br>
+          <input type="text" name="town"><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.town) { %>
+            <div class="isMissingTown">        
+              <%= session.flash.errors.town %>        
+            </div>
+          <% } %>
+          <br>
+          <%= lang['views.register.streetTxt'] %><br>
+          <input type="text" name="street"><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.street) { %>
+            <div class="isMissingStreet">           
+              <%= session.flash.errors.street %>         
+            </div>
+          <% } %>
+          <br>
+          <%= lang['views.previousJobTxt'] %><br>
+          <input type="text" name="previousJob"><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.previousJob) { %>
+            <div class="isMissingPreviousJob">         
+              <%= session.flash.errors.previousJob %>          
+            </div>
+          <% } %>
+          <br>
+          <%= lang['views.worksAsTxt'] %><br>
+          <input type="text" name="worksAs"><br>
+          <% if(typeof session.flash.errors != "undefined" && session.flash.errors.worksAs) { %>
+            <div class="isMissingWorksAs">        
+              <%= session.flash.errors.worksAs %>      
+            </div>
+          <% } %>
+          <br>
+          <%= lang['views.register.profilePictureTxt'] %><br> 
+          <input type="file" name="image"><br><br>
+        <button type="submit"><h3><%= lang['views.register.registrationTxt'] %></h3></button>     
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../includes/footer') %>

@@ -1,0 +1,32 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+  <div class="ex3">
+    <div class="menuCheck">
+      <form method="post">
+        <div class="title-login">
+          <%= lang['views.loginTxt'] %>
+        </div><br><br>
+        <h5><%= lang['views.login.pleaseLoginTxt'] %></h5><br>
+        <%= lang['views.usernameTxt'] %>
+        <input type="text" name="username" autofocus><br>
+        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.username) { %>
+          <div class="username-exists">        
+            <%= session.flash.errors.username %>         
+          </div>
+        <% } %>
+        <br>    
+        <%= lang['views.passwordTxt'] %>
+        <input type="password" name="password"><br>
+        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.password) { %>
+          <div class="small-password">      
+            <%= session.flash.errors.password %>        
+          </div>
+        <% } %>
+        <br>
+        <h5><%= lang['views.login.notHaveAccountTxt'] %> <a href="/auth/register"><%= lang['views.login.makeRegistrationTxt'] %> </a></h5><br><br>            
+        <button type="submit"><h3><%= lang['views.loginTxt'] %></h3></button> 
+      </form> 
+    </div>
+  </div>
+</div>
+<%- include('../includes/footer') %>

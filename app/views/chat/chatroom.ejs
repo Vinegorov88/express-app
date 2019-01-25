@@ -1,0 +1,37 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+  <div class="ex3">
+    <div class="users-chat">
+        <% users.forEach(function(user) { %>
+            <% if(user.status == "online") { %>      
+                <div class="pic-online-user">
+                    <img src="/uploads/images/<%= user.image %>" style="width:27px; height: 27px; border-radius:75%; border: 0.5px solid #fff;"alt="Image"/>
+                    <%= user.username %>
+                </div><br><br>   
+           <% } %>
+        <% }); %>
+    </div> 
+    <div class="div-chatroom">
+        <% chats.forEach(function(chat){ %>               
+            <b><%= chat.username %></b>: <%= chat.message %><br>     
+        <% }); %>
+    </div>   
+    <div class="message-box">   
+        <div class="text-box">        
+            <form method="post" action="/chat/send/<%= session.user._id %>">
+                <input type="text" name="text" value="<% if(session.flash) { %><%= session.flash.text %><% } %>" autofocus style="width:304px; height:26px;">                           
+                <input type="submit" value="<%= lang['views.chat.sendMessageTxt'] %>" style="width:67px; height:26px;">
+            </form>
+        </div>
+        <div class="pic-session-user">
+            <img src="/uploads/images/<%= session.user.image %>" style="width:27px; height: 27px; border-radius:75%; border: 0.5px solid #fff;"alt="Image"/>
+        </div>
+    </div>
+    <div class="no-text">
+        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.text) { %>
+            <%= session.flash.errors.text %>
+        <% } %>  
+    </div>       
+  </div>
+</div>
+<%- include('../includes/footer') %>

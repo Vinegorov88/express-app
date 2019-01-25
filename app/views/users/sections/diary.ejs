@@ -1,0 +1,58 @@
+<div class="div-userInformation">
+    <div class="presentationUser">
+      <%= lang['views.presentationTxt'] %>
+      <hr>
+    </div>
+    <div class="aboutUser">
+      <br>
+      <br>
+      <%= lang['views.previousJobTxt'] %> - <%= user.previousJob %>
+      <br>
+      <br>
+      <%= lang['views.worksAsTxt'] %> - <%= user.worksAs %>
+      <br>
+      <br>
+      <%= lang['views.residenceTxt'] %> - <%= user.town %>
+      <br>
+      <br>
+      <%= lang['views.fromTxt'] %> <%= user.town %>
+      <br>
+      <br>
+      <%= lang['views.joinTxt'] %> <%= user.date %>
+    </div>
+  </div>
+  <div class="div-photosOftheUser">
+    <div class="text-photosOftheUser">
+      <%= lang['views.photosTxt'] %>
+      <hr>
+    </div>
+    <img src="/uploads/images/<%= user.image %>" style="width:69px; height: 69px; border: 1.5px solid #fff; margin-top: 36px;"alt="Image"/>
+    <img src="/uploads/images/<%= user.photowall %>" style="width:69px; height: 69px; border: 1.5px solid #fff; margin-top: 36px;"alt="Image"/>
+  </div>
+  <div class="div-friendsOftheUser">
+    <div class="text-friendsOftheUser">
+      <%= lang['views.friendsTxt'] %> <%= user.friends.length %>
+    </div>
+  </div>
+  <div class="updatePhotoUser">
+    <div class="updatedPhoto">
+      <img src="/uploads/images/<%= user.image %>" style="width:35px; height: 35px; border-radius:75%; border: 1px solid #fff;"alt="Image"/>   
+    </div>
+    <div class="usernameInPhotoUpdate">
+      <a href="/users/show/<%= user.username %>" title="">
+        <h6><%= user.name %> <%= user.fathersname %></h6>
+      </a>
+    </div>
+    <div class="updatePhotoText">
+      <%= lang['views.updatePhotoTxt'] %>
+    </div>
+    <div class="timeAndDateOfUpdate">
+      <%= user.date %>
+    </div>
+    <div class="photoWallOfUpdate-div">
+      <img src="/uploads/images/<%= user.photowall %>" style="width:381px; height:156px; border-radius: 0%;" alt="Image"/>  
+      <div class="updatedPhotoInUpdated">
+        <img src="/uploads/images/<%= user.image %>" style="width:279px; height: 279px; border-radius:75%; border: 3px solid #fff; margin-left: 53px; margin-top: -142px;"alt="Image"/>       
+      </div>
+    </div>
+</div>

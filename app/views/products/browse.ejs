@@ -1,0 +1,45 @@
+<%- include('../includes/header') %>
+<div class="siteContent">
+    <div class="ex3-1">
+        <div class="cart">
+            <div class="text">
+                <h5><%= lang['views.products.addedProductsTxt'] %></h5>
+                </p><small><%= Object.keys(session.cart).length %> <%= lang['views.products.numberProdutcsTxt'] %></small></p>      
+            </div>
+            <% if(typeof session.flash.errors != "undefined" && session.flash.errors.insufficientAmount) { %>
+                <div class="insufficientAmount">
+                    <%= session.flash.errors.insufficientAmount %>
+                </div>
+            <% } %>         
+            <a href="/cart/view" class="hover-text">
+                <img src="/uploads/images/cart.png" style="width: 15px; height: 15px;" alt="Image"/>
+                <%= lang['views.products.cartTxt'] %>
+            </a>         
+            <% if(session.user) { %>
+                <div class="balance">
+                    <%= lang['views.products.userBalanceTxt'] %> <%= Math.round(session.user.balance * 100) / 100 %> <%= lang['views.currency'] %>
+                </div>
+            <% } %>
+        </div><br><br>     
+        <% products.forEach(function(product) { %>
+            <div class="all-products">         
+                <div class="browse-products">                    
+                    <a href="/products/browse" title="Image">
+                        <img src="/uploads/images/<%= product.image %>" style="width:130px; height: 93px;" alt="Image"/>        
+                    </a>
+                    <%= product.info %><br><br>
+                    <div class="a-center">
+                        <span class="cell-label"><%= lang['views.quantity'] %></span>                                
+                    </div>                              
+                    <div class="buttonShoppingItem">                         
+                        <form method="post" action="/cart/add/<%= product._id %>">
+                            <input name="quantity" data-cart-item-id="AL gp10a" value="1" size="4" title="Количество" class="input-text-qty" maxlength="12">                               
+                            <input type="submit" value="<%= lang['views.products.productsBuyTxt'] %>" style="width:105px; height: 22px;">
+                        </form>            
+                    </div>
+                </div>
+            </div>
+        <% }); %>        
+    </div>
+</div>
+<%- include('../includes/footer') %>
