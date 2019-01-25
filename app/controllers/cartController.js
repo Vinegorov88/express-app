@@ -17,7 +17,7 @@ module.exports.add = function(req, res){
     if(typeof req.session.user != "undefined"){
       if(req.session.user.balance < 5){
         errors.insufficientAmount = req.lang["errors.cart.insufficientAmount"];
-        req.session.flash.errors = errors;
+        req.flash.errors = errors;
         return res.redirect('back');
       }
     }
@@ -70,7 +70,7 @@ module.exports.checkout = function(req, res){
 
   if(typeof req.session.user != "undefined" && req.session.user.balance < req.session.finalamount){
     errors.finalamount = req.lang["errors.cart.finalamount"];
-    req.session.flash.errors = errors;
+    req.flash.errors = errors;
     return res.redirect('/cart/view');
   }
   return res.render('cart/checkout');

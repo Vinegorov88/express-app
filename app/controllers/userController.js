@@ -42,7 +42,7 @@ module.exports.show = function(req, res){
     }
 
     if(Object.keys(errors).length != 0){
-        req.session.flash.errors = errors
+        req.flash.errors = errors
         return res.redirect('back');
     }
     User.findOne({username: req.params.username}, function(err, user){

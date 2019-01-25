@@ -50,7 +50,7 @@ module.exports.handleRegister = function(req, res){
     if(!req.body.worksAs) errors.worksAs = req.lang['errors.cannotBeEmpty'];
 
     if(Object.keys(errors).length != 0) {
-      req.session.flash = {errors: errors, success: success};
+      req.flash = {errors: errors, success: success};
       return res.redirect('/auth/register');
     }
 
@@ -118,7 +118,7 @@ module.exports.handleLogin = async function(req, res){
     }
 
     if(Object.keys(errors).length != 0) {
-      req.session.flash.errors = errors;
+      req.flash.errors = errors;
       return res.redirect('back');
     }
    

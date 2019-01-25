@@ -15,7 +15,7 @@ module.exports.handleOrder = function(req, res){
     if(!req.body.address) errors.address = req.lang["errors.cannotBeEmpty"];
 
     if(Object.keys(errors).length != 0) {
-        req.session.flash.errors = errors;
+        req.flash.errors = errors;
         return res.redirect('/cart/checkout');
     }
 

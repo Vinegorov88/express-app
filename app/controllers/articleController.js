@@ -74,7 +74,7 @@ module.exports.handlePublish = function(req, res){
   if(!req.body.text) errors.text = req.lang["errors.cannotBeEmpty"];
 
   if(Object.keys(errors).length != 0){
-    req.session.flash.errors = errors;
+    req.flash.errors = errors;
     return res.redirect('/articles/publish');
   }
   
@@ -105,7 +105,7 @@ module.exports.handlePublishComment = function(req, res){
   if(!req.body.comment) errors.comment = req.lang["errors.cannotBeEmpty"];
 
   if(Object.keys(errors).length != 0){
-    req.session.flash.errors = errors;
+    req.flash.errors = errors;
     return res.redirect('back');
   }
   
