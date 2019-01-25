@@ -11,7 +11,6 @@ module.exports.handleSearch = function(req, res){
     else {    
 
         let errors = {};
-        let success = {};
 
         function escapeRegex(text) {
             return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -25,7 +24,7 @@ module.exports.handleSearch = function(req, res){
    
 
             if(Object.keys(errors).length != 0) {
-                req.flash.errors = errors;
+                req.session.flash.errors = errors;
                 return res.render('pages/search');
             }
  
