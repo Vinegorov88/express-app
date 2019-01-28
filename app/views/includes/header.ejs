@@ -63,7 +63,7 @@
             <a href="/products/browse"><%= lang['views.nav.productsBtn'] %></a>
           </div>
           <div class="chatroomLink">
-            <a href="/chat/chatroom"><%= lang['views.nav.chatroomBtn'] %></a>
+            <a href="<% if(typeof session.user != "undefined") { %>/chat/chatroom"<% } else { %>/auth/login<% } %>"><%= lang['views.nav.chatroomBtn'] %></a>
           </div>  
         <% } %>       
           <div class="usersLink">
