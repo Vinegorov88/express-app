@@ -57,7 +57,7 @@ router.get('/cart/delete/:productId', cartController.delete);
 router.get('/chat/chatroom', isLoggedIn, chatController.showOnlineUsers);
 router.post('/chat/send/:userId', isLoggedIn, chatController.sendMessage);
 router.get('/pages/search', searchController.handleSearch);
-router.post('/change/language/:lang', pagesController.changeLang);
+router.get('/change/language/:lang', pagesController.changeLang);
 router.get('/pages/contactUs', pagesController.contactUs);
 
 module.exports = router;

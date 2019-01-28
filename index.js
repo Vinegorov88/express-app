@@ -29,9 +29,9 @@ app.use(cookieParser('_secret_'));
 app.use(session({secret: '_secret_', cookie: { maxAge: 60 * 60 * 1000 }, saveUninitialized: false, resave: false}));
 app.use(selectedLanguage);
 app.use(refreshSession);
-app.use(setLocals);
 app.use(lastOnline);
 app.use(flash);
+app.use(setLocals);
 
 // Routes
 app.use('/', routes);

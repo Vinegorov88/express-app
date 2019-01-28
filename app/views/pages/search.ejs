@@ -5,14 +5,14 @@
             <form action="/pages/search" method="GET" id="search">
                 <label><%= lang['views.search.infoTxt'] %> </label>
                 <input type="text" name="query" autofocus  value="" placeholder="<%= lang['views.search.inputInfoTxt'] %>"><br><br>
-                <% if(typeof session.flash.errors != "undefined" && session.flash.errors.query) { %>
-                    <div class="query-exists">        
-                        <%= session.flash.errors.query %>
-                    </div>
-                <% } %>
                 <button type="submit"><h3><%= lang['views.search.nameBtn'] %></h3></button>
             </form>
         </div>
+        <% if(typeof session.flash.errors != "undefined" && session.flash.errors.query) { %>
+            <div class="query-exists">        
+                <%= session.flash.errors.query %>
+            </div>
+        <% } %>
         <% if (typeof articles != "undefined" ) { %>
             <div class="success-search">
                 <% if(req.query.query) { %>

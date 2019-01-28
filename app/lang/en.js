@@ -146,6 +146,7 @@ module.exports = {
 
     //Search
     ['errors.search.noResult']: "No results found",
+    ['success.search.result']: "Result by keyword:",
     ['views.search.infoTxt']: "Search for content by keyword:",
     ['views.search.inputInfoTxt']: "Search in articles ....",
     ['views.search.nameBtn']: "Search",
