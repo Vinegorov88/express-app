@@ -273,8 +273,8 @@ body{
   position: absolute;
 }
 .query-exists{
-  margin-top: -21px;
-  margin-left: 9px;
+  margin-top: 30px;
+  margin-left: 250px;
   text-align: center;
   letter-spacing: 5px;
   width: 342px;
@@ -1201,8 +1201,9 @@ body{
   border-radius: 4px;
   width: 555px;
   height: 107px;
-  margin-left: 28px;
+  margin-left: 100px;
   text-align: center;
+  zoom: 80%;
   transition: all .2s ease-in-out;
 }
 .oneArticle:hover{
@@ -1476,6 +1477,7 @@ div.ex3 {
   width: 400px;
   margin-left: 240px;
   margin-top: 30px;
+  position: absolute;
 }
 .div-browse-products{
   width: 200px;
@@ -1524,9 +1526,10 @@ div.ex3 {
   border-radius: 4px;
   width: 555px;
   height: 107px;
-  margin-left: 100px;
+  margin-left: 224px;
   margin-top: 12px;
   text-align: center;
+  zoom: 75%;
   transition: all .2s ease-in-out;
 }
 .info-article:hover{
@@ -2064,3 +2067,12 @@ fieldset {
   position: absolute;
 }
 
+#fof{display:block; width:814px; margin:100px 0; line-height:1.6em; text-align:center; margin-top: 15px;}
+#fof .hgroup{text-transform:uppercase;}
+#fof .hgroup h1{margin-bottom:25px; font-size:70px;}
+#fof .hgroup h1 span{display:inline-block; margin-left:5px; padding:2px; overflow:hidden;}
+#fof .hgroup h1 span strong{display:inline-block; padding:18px 20px 20px; font-weight:normal;}
+#fof .hgroup h2{font-size:50px; margin-bottom: 29px;}
+#fof .hgroup h2 span{display:block; font-size:16px; margin-top: 35px;}
+#fof p{margin:25px 0 15px 0; padding:0; font-size:13px;}
+#fof p:first-child{margin-top:0;}

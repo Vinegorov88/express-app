@@ -175,4 +175,13 @@ module.exports = {
     //Cart errors
     ['errors.cart.insufficientAmount']: "Your account balance is currently below the allowable minimum, please charge your account.",
     ['errors.cart.finalamount']: "The final amount of products you want to order exceeds your availability, please charge your account.",
+
+    //Error 404
+    ['errors.error404.message']: "The page you are looking for is probably removed, its name changed",
+    ['errors.error404.pageNotFound']: "or is temporarily unavailable.",
+    ['errors.error404.goBackTo']: "Go back to",
+    ['errors.error404.theBeginning']: "the beginning",
+    ['errors.error404.orUse']: "or use",
+    ['errors.error404.searchEngine']: "search engine",
+    ['errors.error404.OnTheSite']: "on the site."
 }

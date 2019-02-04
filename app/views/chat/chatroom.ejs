@@ -3,7 +3,7 @@
   <div class="ex3">
     <div class="users-chat">
         <% users.forEach(function(user) { %>
-            <% if(user.status == "online") { %>      
+            <% if(user.isOnline == 1) { %>      
                 <div class="pic-online-user">
                     <img src="/uploads/images/<%= user.image %>" style="width:27px; height: 27px; border-radius:75%; border: 0.5px solid #fff;"alt="Image"/>
                     <%= user.username %>

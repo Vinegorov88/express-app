@@ -4,17 +4,17 @@
     <div class="menuCheck">
       <form method="post" action="" encType="multipart/form-data">
         <div class="title-registration">
-          <%= lang['views.register.registrationTxt'] %>
+          <%= lang['views.register.registrationTxt'] %> 
         </div><br><br>
         <%= lang['views.usernameTxt'] %><br>   
-          <input type="text" name="username" autofocus><br>
+          <input type="text" name="username" value="<% if(typeof flash.success != "undefined" && flash.success.username) { %><%= flash.success.username %><% } %>"><br>
           <% if(typeof flash.errors != "undefined" && flash.errors.username) { %>
             <div class="username-exists">
               <%= flash.errors.username %>
             </div>
-          <% } else if(typeof flash.errors != "undefined" && flash.success.username) { %>
+          <% } else if(typeof flash.errors != "undefined" && flash.success.usernameIsNotOccupied) { %>
             <div class="username-free">
-                <%= flash.success.username %>
+                <%= flash.success.usernameIsNotOccupied %>
             </div>
           <% } else if(typeof flash.errors != "undefined" && flash.erorrs.username){ %>
             <%= flash.errors.username %>
@@ -37,7 +37,7 @@
           <% } %>
           <br><br>
           <%= lang['views.nameTxt'] %><br>
-          <input type="text" name="name" placeholder="">
+          <input type="text" name="name" value="<% if(typeof flash.success  != "undefined" && flash.success.name) { %><%= flash.success.name %><% } %>">
           <% if(typeof flash.errors != "undefined" && flash.errors.name) { %>
             <div class="isMissingName">   
               <%= flash.errors.name %>  
@@ -45,15 +45,15 @@
           <% } %>
           <br><br>
           <%= lang['views.surnameTxt'] %><br>
-          <input type="text" name="fathersname">
-          <% if(typeof flash.errors != "undefined" && flash.errors.fathersname) { %>
+          <input type="text" name="surname" value="<% if(typeof flash.success  != "undefined" && flash.success.surname) { %><%= flash.success.surname %><% } %>">
+          <% if(typeof flash.errors != "undefined" && flash.errors.surname) { %>
             <div class="isMissingFathersname">           
-              <%= flash.errors.fathersname %>            
+              <%= flash.errors.surname %>            
             </div>
           <% } %>
           <br><br>
           <%= lang['views.register.egnTxt'] %><br>
-          <input type="text" name="egn">
+          <input type="text" name="egn" value="<% if(typeof flash.success  != "undefined" && flash.success.egn) { %><%= flash.success.egn %><% } %>">
           <% if(typeof flash.errors != "undefined" && flash.errors.egn) { %>
             <div class="isMissingEgn">        
               <%= flash.errors.egn %>           
@@ -61,7 +61,7 @@
           <% } %>
           <br><br>
           <%= lang['views.townTxt'] %><br>
-          <input type="text" name="town"><br>
+          <input type="text" name="town" value="<% if(typeof flash.success  != "undefined" && flash.success.town) { %><%= flash.success.town %><% } %>"><br>
           <% if(typeof flash.errors != "undefined" && flash.errors.town) { %>
             <div class="isMissingTown">        
               <%= flash.errors.town %>        
@@ -69,7 +69,7 @@
           <% } %>
           <br>
           <%= lang['views.register.streetTxt'] %><br>
-          <input type="text" name="street"><br>
+          <input type="text" name="street" value="<% if(typeof flash.success  != "undefined" && flash.success.street) { %><%= flash.success.street %><% } %>"><br>
           <% if(typeof flash.errors != "undefined" && flash.errors.street) { %>
             <div class="isMissingStreet">           
               <%= flash.errors.street %>         
@@ -77,7 +77,7 @@
           <% } %>
           <br>
           <%= lang['views.previousJobTxt'] %><br>
-          <input type="text" name="previousJob"><br>
+          <input type="text" name="previousJob" value="<% if(typeof flash.success  != "undefined" && flash.success.previousJob) { %><%= flash.success.previousJob %><% } %>"><br>
           <% if(typeof flash.errors != "undefined" && flash.errors.previousJob) { %>
             <div class="isMissingPreviousJob">         
               <%= flash.errors.previousJob %>          
@@ -85,7 +85,7 @@
           <% } %>
           <br>
           <%= lang['views.worksAsTxt'] %><br>
-          <input type="text" name="worksAs"><br>
+          <input type="text" name="worksAs" value="<% if(typeof flash.success  != "undefined" && flash.success.worksAs) { %><%= flash.success.worksAs %><% } %>"><br>
           <% if(typeof flash.errors != "undefined" && flash.errors.worksAs) { %>
             <div class="isMissingWorksAs">        
               <%= flash.errors.worksAs %>      

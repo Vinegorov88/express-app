@@ -24,9 +24,11 @@ module.exports.handleRegister = function(req, res){
   User.findOne({username: req.body.username}, function(err, user){
     
     if(!req.body.username) errors.username = req.lang["errors.cannotBeEmpty"];
+    else if(user) errors.username = req.lang["errors.register.usernameExists"];
+    else success.username = req.body.username;
 
-    if(user) errors.username = req.lang["errors.register.usernameExists"];
-    else if(req.body.username && !user) success.username = req.lang["success.register.usernameAvailable"];
+    if(req.body.username && !user) success.usernameIsNotOccupied = req.lang["success.register.usernameAvailable"];
+    else success.username = req.body.username;
 
     if(!req.body.password) errors.password = req.lang["errors.cannotBeEmpty"];
     else if(req.body.password.length < 6 || req.body.password.length > 20) errors.password = req.lang["errors.register.passwordTooShort"];
@@ -35,19 +37,26 @@ module.exports.handleRegister = function(req, res){
     else if(req.body.password != req.body.repeatPassword) errors.repeatPassword = req.lang['errors.register.invalidPassword'];
 
     if(!req.body.name) errors.name = req.lang['errors.cannotBeEmpty'];
+    else success.name = req.body.name;
 
-    if(!req.body.fathersname) errors.fathersname = req.lang['errors.cannotBeEmpty'];
+    if(!req.body.surname) errors.surname = req.lang['errors.cannotBeEmpty'];
+    else success.surname = req.body.surname;
 
     if(!req.body.egn) errors.egn = req.lang['errors.cannotBeEmpty'];
     else if(req.body.egn.length != 10) errors.egn = req.lang['errors.register.invalidEgn'];
+    else success.egn = req.body.egn;
 
     if(!req.body.town) errors.town = req.lang['errors.cannotBeEmpty'];
+    else success.town = req.body.town; 
 
     if(!req.body.street) errors.street = req.lang['errors.cannotBeEmpty'];
+    else success.street = req.body.street; 
 
     if(!req.body.previousJob) errors.previousJob = req.lang['errors.cannotBeEmpty'];
+    else success.previousJob = req.body.previousJob; 
 
     if(!req.body.worksAs) errors.worksAs = req.lang['errors.cannotBeEmpty'];
+    else success.worksAs = req.body.worksAs; 
 
     if(Object.keys(errors).length != 0) {
       req.session.flash = {errors: errors, success: success};

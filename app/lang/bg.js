@@ -175,4 +175,13 @@ module.exports = {
     //Cart errors
     ['errors.cart.insufficientAmount']: "Наличността по вашата сметка в момента е под допустимия минимум, моля заредете сметката си.",
     ['errors.cart.finalamount']: "Крайната сума на продуктите който искате да поръчате надвишава вашата наличност, моля заредете сметката си.",
+
+    //Error 404
+    ['errors.error404.message']: "Страницата, която търсите вероятно е премахната, името и е променено",
+    ['errors.error404.pageNotFound']: "или е временно недостъпна.",
+    ['errors.error404.goBackTo']: "Върнете се в",
+    ['errors.error404.theBeginning']: "началото",
+    ['errors.error404.orUse']: "или използвайте",
+    ['errors.error404.searchEngine']: "търсачката",
+    ['errors.error404.OnTheSite']: "на сайта."
 }

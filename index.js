@@ -11,6 +11,7 @@ let fileUpload = require('express-fileupload');
 let pageNotFound = require('./app/middlewares/pageNotFound');
 let selectedLanguage = require('./app/middlewares/selectedLanguage');
 let refreshSession = require('./app/middlewares/refreshSession');
+let errorHandler = require('./app/middlewares/errorHandler');
 let flash = require('./app/middlewares/flash');
 let setLocals = require('./app/middlewares/setLocals');
 let lastOnline = require('./app/middlewares/lastOnline');
@@ -36,8 +37,13 @@ app.use(setLocals);
 // Routes
 app.use('/', routes);
 
+//Middleware errors
+app.use(errorHandler);
+
 // Page not found
 app.use(pageNotFound);
 
 // Start server
-app.listen(8080, () => console.log('Server listening on port 8080...'));
+
+app.listen(8080, () => console.log('Server listening on port 8080...'), );
+
