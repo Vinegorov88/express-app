@@ -36,15 +36,6 @@ module.exports.browse = function(req, res){
 
 //Show profile specific user
 module.exports.show = function(req, res){
-    let errors = {};
-    if(typeof req.session.user == "undefined"){
-        errors.notLogged = "За да разгледате профила на този потребител, моля влезте в профила си!";      
-    }
-
-    if(Object.keys(errors).length != 0){
-        req.flash.errors = errors
-        return res.redirect('back');
-    }
     User.findOne({username: req.params.username}, function(err, user){
         if(err || !user) return error404(req, res);  
         res.render('users/show', {user: user, section: 'diary'});
