@@ -12,6 +12,7 @@ let orderController = require('../controllers/orderController');
 let userController = require('../controllers/userController');
 let profileController = require('../controllers/profileController');
 let pagesController = require('../controllers/pagesController');
+let APIController = require('../controllers/APIController');
 let isLoggedIn = require('../middlewares/isLoggedIn');
 let isNotLoggedIn = require('../middlewares/isNotLoggedIn');
 let isNotBlocked = require('../middlewares/isNotBlocked');
@@ -59,5 +60,9 @@ router.post('/chat/send/:userId', isLoggedIn, chatController.sendMessage);
 router.get('/pages/search', searchController.handleSearch);
 router.get('/change/language/:lang', pagesController.changeLang);
 router.get('/pages/contactUs', pagesController.contactUs);
+router.get('/api/btcToUsd/last', APIController.btcToUsdLast);
+router.get('/api/btcToUsd/high', APIController.btcToUsdHigh);
+router.get('/api/btcToUsd/average', APIController.btcToUsdAverage);
+router.get('/api/btcToUsd/low', APIController.btcToUsdLow);
 
 module.exports = router;

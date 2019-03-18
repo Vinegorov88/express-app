@@ -1,3 +1,5 @@
+let theUsernameExists = require('../services/users/theUsernameExists');
+let lastUsersOnline = require('../services/users/lastUsersOnline');
 let error404 = require('../services/error404');
 let login = require('../services/auth/login');
 let logout = require('../services/auth/logout');
@@ -20,15 +22,27 @@ module.exports.login = function(req, res){
 module.exports.handleRegister = function(req, res){
   let errors = {};
   let success = {};
- 
-  User.findOne({username: req.body.username}, function(err, user){
+  let lastIntroduced = {};
+  let freeUsername = {};
+
+  User.findOne({username: req.body.username}, async function(err, user){
     
     if(!req.body.username) errors.username = req.lang["errors.cannotBeEmpty"];
-    else if(user) errors.username = req.lang["errors.register.usernameExists"];
-    else success.username = req.body.username;
+    else lastIntroduced.username = req.body.username;
+    
+    if(user){    
+      errors.username = req.lang["errors.register.usernameExists"];
+  
+      let username = await theUsernameExists(req.body.username);
+      req.body.username = username;
 
-    if(req.body.username && !user) success.usernameIsNotOccupied = req.lang["success.register.usernameAvailable"];
-    else success.username = req.body.username;
+      freeUsername.username = req.body.username;
+      success.proposedUsername = req.lang["success.register.proposedUsername"];   
+    } 
+    
+    else if(!user){
+      success.username = req.lang["success.register.usernameAvailable"];
+    }
 
     if(!req.body.password) errors.password = req.lang["errors.cannotBeEmpty"];
     else if(req.body.password.length < 6 || req.body.password.length > 20) errors.password = req.lang["errors.register.passwordTooShort"];
@@ -37,29 +51,29 @@ module.exports.handleRegister = function(req, res){
     else if(req.body.password != req.body.repeatPassword) errors.repeatPassword = req.lang['errors.register.invalidPassword'];
 
     if(!req.body.name) errors.name = req.lang['errors.cannotBeEmpty'];
-    else success.name = req.body.name;
+    else lastIntroduced.name = req.body.name;
 
     if(!req.body.surname) errors.surname = req.lang['errors.cannotBeEmpty'];
-    else success.surname = req.body.surname;
+    else lastIntroduced.surname = req.body.surname;
 
     if(!req.body.egn) errors.egn = req.lang['errors.cannotBeEmpty'];
     else if(req.body.egn.length != 10) errors.egn = req.lang['errors.register.invalidEgn'];
-    else success.egn = req.body.egn;
+    else lastIntroduced.egn = req.body.egn;
 
     if(!req.body.town) errors.town = req.lang['errors.cannotBeEmpty'];
-    else success.town = req.body.town; 
+    else lastIntroduced.town = req.body.town; 
 
     if(!req.body.street) errors.street = req.lang['errors.cannotBeEmpty'];
-    else success.street = req.body.street; 
+    else lastIntroduced.street = req.body.street; 
 
     if(!req.body.previousJob) errors.previousJob = req.lang['errors.cannotBeEmpty'];
-    else success.previousJob = req.body.previousJob; 
+    else lastIntroduced.previousJob = req.body.previousJob; 
 
     if(!req.body.worksAs) errors.worksAs = req.lang['errors.cannotBeEmpty'];
-    else success.worksAs = req.body.worksAs; 
+    else lastIntroduced.worksAs = req.body.worksAs; 
 
     if(Object.keys(errors).length != 0) {
-      req.session.flash = {errors: errors, success: success};
+      req.session.flash = {errors: errors, success: success, lastIntroduced: lastIntroduced, freeUsername: freeUsername};
       return res.redirect('/auth/register');
     }
 
@@ -106,6 +120,7 @@ module.exports.handleRegister = function(req, res){
         return res.redirect('/auth/login');
       });
     });
+    return username;
   });
 }
 
@@ -113,11 +128,13 @@ module.exports.handleRegister = function(req, res){
 //User login
 module.exports.handleLogin = async function(req, res){ 
   let errors = {};
+  let lastIntroduced = {};
 
   try {
     if(!req.body.username) errors.username = req.lang['errors.cannotBeEmpty'];
-    if(!req.body.password) errors.password = req.lang['errors.cannotBeEmpty'];
+    else lastIntroduced.username = req.body.username;
 
+    if(!req.body.password) errors.password = req.lang['errors.cannotBeEmpty'];
     let user;
 
     if(req.body.username && req.body.password) { 
@@ -127,10 +144,9 @@ module.exports.handleLogin = async function(req, res){
     }
 
     if(Object.keys(errors).length != 0) {
-      req.session.flash.errors = errors;
+      req.session.flash = {errors: errors, lastIntroduced: lastIntroduced};
       return res.redirect('back');
     }
-   
     await login(req, res, user);  
     res.redirect('/profile/show');
   }
@@ -144,9 +160,14 @@ module.exports.handleLogin = async function(req, res){
 module.exports.logout = function(req, res){
   User.findOne({_id: req.session.user._id}, function(err, user){
     if(!err && user){
-      logout(req, res, user, function(){
-        res.redirect('/');
-      }); 
+      for (let userId in lastUsersOnline) {
+        if (userId == req.session.user._id) {
+          delete(lastUsersOnline[userId]);
+        }
+        logout(req, res, user, function(){
+          res.redirect('/');
+        }); 
+      }
     } else {
       return error404(req, res);
     }

@@ -14,7 +14,7 @@
                     <center>
                         <h5><%= user.username %></h5>
                     </center>
-                    <% if(user.isOnline == "1") { %>
+                    <% if(lastUsersOnline[user._id]) { %>
                         <div class="OnlineTxt">
                           <h6><%= lang['views.onlineTxt'] %></h6>
                         </div> 

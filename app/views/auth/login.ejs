@@ -8,7 +8,7 @@
         </div><br><br>
         <h5><%= lang['views.login.pleaseLoginTxt'] %></h5><br>
         <%= lang['views.usernameTxt'] %>
-        <input type="text" name="username" autofocus><br>
+        <input type="text" name="username" value="<% if(typeof flash.lastIntroduced != "undefined" && flash.lastIntroduced.username) { %><%= flash.lastIntroduced.username %><% } %>"><br>
         <% if(typeof flash.errors != "undefined" && flash.errors.username) { %>
           <div class="username-exists">        
             <%= flash.errors.username %>         

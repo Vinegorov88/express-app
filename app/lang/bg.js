@@ -82,6 +82,7 @@ module.exports = {
     ['errors.register.invalidEgn']: "Моля, въведете валидно ЕГН!",
     ['errors.register.wrongPassword']: "Паролата не съвпада, моля попълнете полето Повтори парола отново.",
     ['success.register.usernameAvailable']: "Потребителското име не съществува.",
+    ['success.register.proposedUsername']: "Можем да ви предложим:",
 
 
     //Articles views

@@ -1,5 +1,15 @@
 <%- include('../includes/header') %>
 <div class="siteContentHome">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    function refresh() {
+      $('#btcToUsd-last').load("http://localhost:8080/api/btcToUsd/last");
+      $('#btcToUsd-high').load("http://localhost:8080/api/btcToUsd/high");
+      $('#btcToUsd-average').load("http://localhost:8080/api/btcToUsd/average");
+      $('#btcToUsd-low').load("http://localhost:8080/api/btcToUsd/low");
+    }
+    setInterval(refresh, 4000);
+  </script>
   <div class="ex3">
     <div class="menuCheck">
       <div class="news">
@@ -64,7 +74,7 @@
                 </div><hr><br><br>
                 <div class="top-user-username">
                 <%= user.username %>
-                  <% if(user.isOnline == "1") { %>
+                  <% if(lastUsersOnline[user._id]) { %>
                     <div class="userOnline">
                       <h6><%= lang['views.onlineTxt'] %></h6>
                     </div> 
@@ -87,19 +97,34 @@
                 <img src="/uploads/images/DeepinScreenshot_select-area_20181212192050.png" style="width:283px; height: 77px;" alt="Image"/>
               </a>
           </div>
-          <div class="sinoptik-banner">
-              <a href="https://www.sinoptik.bg/vidin-bulgaria-100725905">
-                <img src="/uploads/images/DeepinScreenshot_select-area_20181212192208.png" style="width:284px; height: 77px;" alt="Image"/>
-              </a>
+          <div class="currency">
+            <% currencies.forEach(function(currency) { %>
+              <% if(currency.base == 'BTC') { %>
+                <div class="title-price-btc">Bitcoin (BTC) to United States Dollar (USD)</div>
+                <div class="text-lastPrice">Last Price --></div> <div class="btcToUSD-price" id="btcToUsd-last">$<%= currency.last %></div>
+                <div class="low-price-btc-title">Low: </div><div class="low-price-btc" id="btcToUsd-low">$<%= currency.low %></div>
+                <div class="high-price-btc-title">High:</div><div class="high-price-btc" id="btcToUsd-high">$<%= currency.high %></div>
+                <div class="average-price-btc-title">Average:</div><div class="average-price-btc" id="btcToUsd-average">$<%= currency.average %></div>             
+              <% } %>       
+            <% }); %>
           </div> 
         </div>
       </div>
-      <div class="users-length">
-        <%= lang['views.home.registeredUsersTxt'] %> <b><%= users.length %></b>
+      <div class="exchange-rates">
+        <div class="title-currencies">Валутни курсове</div><br> 
+        <div class="currencies"> 
+          <% currencies.forEach(function(currency) { %>
+            <% if(currency.base == 'USD' && currency.quote == 'BGN') { %> 
+              1USD -> BGN <%= currency.last %><br>
+            <% } else if(currency.base == 'USD' && currency.quote == 'GBP'){ %>
+              1USD -> GBP <%= currency.last %>
+            <% } %>        
+          <% }); %>
+        </div>
       </div> 
-      <div class="counter">
+      <!-- <div class="counter">
         <%= lang['views.home.totalVisitsTxt'] %> <b><%= counter.counter %></b>
-      </div>   
+      </div>    -->
     </div>
   </div>
 </div>

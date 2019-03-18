@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.18.0",
+    "bitcoinaverage": "^1.2.1",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -19,12 +21,16 @@
     "express-winston": "^3.0.0",
     "flash": "^1.1.0",
     "init": "^0.1.2",
+    "jquery": "^3.3.1",
+    "jsdom": "^14.0.0",
+    "kraken-api": "^1.0.0",
     "locus": "^2.0.1",
     "moment": "^2.23.0",
     "mongoose": "^5.2.13",
     "public-ip": "^2.4.0",
     "restify-errors": "^6.1.1",
-    "slug": "^0.9.1"
+    "slug": "^0.9.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,5 +1,6 @@
 let User = require('../models/User');
 let error404 = require('../services/error404');
+let lastUsersOnline = require('../services/users/lastUsersOnline');
 let refreshSession = require('../services/refreshSession');
 
 //Render user photos
@@ -29,7 +30,7 @@ module.exports.messages = function(req, res){
 module.exports.browse = function(req, res){
     User.find({}, function(err, users){
       if(err) return error404(req, res);
-      res.render('users/browse', {users: users});
+      res.render('users/browse', {users: users, lastUsersOnline: lastUsersOnline});
     });
 }
 

@@ -267,6 +267,7 @@ body{
 .username-exists{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -284,14 +285,35 @@ body{
 .username-free{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: #1e930c;
   position: absolute;
 }
+.proposedUsername{
+  margin-top: -5px;
+  margin-left: -19px;
+  font-size: 15px;
+  text-align: center;
+  width: 342px;
+  color: #1e930c;
+  position: absolute;
+}
+.freeUsername{
+  margin-top: -5px;
+  margin-left: 248px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #0d5303;
+  position: absolute;
+}
+
 .small-password{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -300,6 +322,7 @@ body{
 .password-mismatch{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -308,6 +331,7 @@ body{
 .isMissingName{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -316,6 +340,7 @@ body{
 .isMissingFathersname{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -324,6 +349,7 @@ body{
 .isMissingEgn{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -332,6 +358,7 @@ body{
 .isMissingTown{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -340,6 +367,7 @@ body{
 .isMissingStreet{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -348,6 +376,7 @@ body{
 .isMissingPreviousJob{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -356,6 +385,7 @@ body{
 .isMissingWorksAs{
   margin-top: -6px;
   margin-left: 31px;
+  font-size: 15px;
   text-align: center;
   width: 342px;
   color: red;
@@ -632,11 +662,11 @@ body{
   margin-top: 504px;
   position: absolute;
 }
-.users-length{
+.exchange-rates{
   border: 1px solid #000000;
   background-color: #ffffff;
   width: 285px;
-  height: 39.5px;
+  height: 79px;
   text-align: center; 
   font-style: oblique;
   padding: 9px; 
@@ -645,18 +675,100 @@ body{
   margin-top: 465px;
   position: absolute;
 }
-.sinoptik-banner{
+.currencies{
+  font-family: Averta,avenir w02,Avenir,Helvetica,Arial,sans-serif;
+  font-weight: 900px;
+  line-height: 1.2;
+  color: #2e4369;
+  text-transform: none;
+  letter-spacing: 0
+}
+.title-currencies{
+  background-color: #fff2ac;
+  background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+  font-family: Averta,avenir w02,Avenir,Helvetica,Arial,sans-serif;
+  color: #10141d;
+  margin-top: -4px;
+}
+.currency{
  border: 1px solid #000000;
+ font-family: OpenSans, sans-serif;
+ font-size: 12px;
+ color: #253044;
+ line-height: 25px;
+ width: 292px;
  height: 78px;
  margin-top: -1px;
  margin-left: 289px;
  position: absolute;
- transition: transform 1s;
 }
-.sinoptik-banner:hover{
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
- }
+.title-price-btc{
+  font-family: OpenSans, sans-serif;
+  margin-left: 25px;
+  position: absolute; 
+}
+.text-lastPrice{
+  font-family: OpenSans, sans-serif;
+  margin-left: 57px;
+  font-size: 13px;
+  margin-top: 23px;
+  color: #253044;
+  position: absolute;
+}
+.btcToUSD-price{
+  font-family: OpenSans, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  color: #253044;
+  margin-top: 23px;
+  margin-left: 139px;
+  -webkit-animation: mymove 4s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 4s infinite;
+  position: absolute;
+}
+@-webkit-keyframes mymove {
+  from {background-color: rgb(177, 177, 212);}
+  to {background-color: rgb(251, 251, 251);}
+}
+.low-price-btc-title{
+  margin-left: 205px;
+  margin-top: 48px;
+  position: absolute;
+}
+.low-price-btc{
+  font-family: OpenSans, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 48px;
+  margin-left: 233px;
+  position: absolute;
+}
+.high-price-btc-title{
+  margin-left: 1px;
+  margin-top: 48px;
+  position: absolute;
+}
+.high-price-btc{
+  font-family: OpenSans, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 48px;
+  margin-left: 32px;
+  position: absolute;
+}
+.average-price-btc-title{
+  margin-left: 92px;
+  margin-top: 48px;
+  position: absolute;
+}
+.average-price-btc{
+  font-family: OpenSans, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 48px;
+  margin-left: 143px;
+  position: absolute;
+}
 .kaprizen-banner{
   border: 1px solid #000000;
   height: 78px;
