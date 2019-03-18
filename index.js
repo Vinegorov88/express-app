@@ -1,4 +1,3 @@
-
 // Require libraries
 let mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/express-app', {useNewUrlParser: true});
@@ -7,6 +6,7 @@ let bodyParser = require('body-parser');
 let routes = require('./app/config/routes');
 let session = require('express-session');
 let cookieParser = require('cookie-parser');
+let axios = require('axios');
 let fileUpload = require('express-fileupload');
 let pageNotFound = require('./app/middlewares/pageNotFound');
 let selectedLanguage = require('./app/middlewares/selectedLanguage');
@@ -15,6 +15,7 @@ let errorHandler = require('./app/middlewares/errorHandler');
 let flash = require('./app/middlewares/flash');
 let setLocals = require('./app/middlewares/setLocals');
 let lastOnline = require('./app/middlewares/lastOnline');
+let removeOfflineUsers = require('./app/services/users/removeOfflineUsers');
 let app = express();
 
 // Configure Express
@@ -44,6 +45,5 @@ app.use(errorHandler);
 app.use(pageNotFound);
 
 // Start server
-
 app.listen(8080, () => console.log('Server listening on port 8080...'), );
 
