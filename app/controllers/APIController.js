@@ -55,7 +55,7 @@ function returnBtcToUsd(){
     });
   });
 }
-setInterval(returnBtcToUsd, 3000);
+// setInterval(returnBtcToUsd, 3000);
 
 
 
@@ -75,53 +75,52 @@ function returnGuestsOfSlaviShow(){
   //Използваме request библиотеката като подаваме желаният сайт
   request('https://www.slavishow.com/', (error, response, html) => {
 
-    //Проверяваме дали несъществува грешка и дали statusCode == 200
-    if(!error && response.statusCode == 200) {
+    //Проверяваме дали съществува грешка
+    if(error) return;
 
-      //Зареждаме HTML-ла с cheerio библиотеката
-      let $ = cheerio.load(html);
+    //Зареждаме HTML-ла с cheerio библиотеката
+    let $ = cheerio.load(html), thisWeeklyGuests = [];
 
-      //Взимаме часът в момента
-      let hour = moment().format('HH:mm:ss');
+    //Взимаме часът в момента
+    let hour = moment().format('HH:mm:ss');
 
-      //Взимаме днешния ден от седмицата
-      let day = moment().format('dddd');
+    //Взимаме днешния ден от седмицата
+    let day = moment().format('dddd');
 
-      //Проверяваме дали днешния ден е различен от Петък, ако е различен приключваме
-      if(day != 'Friday') return;
-      
+    //Проверяваме дали днешния ден е различен от Петък, ако е различен приключваме
+    if(day != 'Saturday') return;
+
+    //Взимаме всички гости за следващата седмица
+    $('.right_column #category-list-4 .sidebar_list li').find('h4').each(function (i, item){
+
       //Взимаме за всеки един ден госта на предаването
-      let Monday = $('.right_column #category-list-4 .sidebar_list li').eq(0).find('h4').text();
-      let Tuesday = $('.right_column #category-list-4 .sidebar_list li').eq(1).find('h4').text();
-      let Wednesday = $('.right_column #category-list-4 .sidebar_list li').eq(2).find('h4').text();
-      let Thursday = $('.right_column #category-list-4 .sidebar_list li').eq(3).find('h4').text();
-      let Friday = $('.right_column #category-list-4 .sidebar_list li').eq(4).find('h4').text(); 
-      
-      //Вмъкваме всеки един ден от седмицата в масив
-      let thisWeeklyGuests = [ Monday, Tuesday, Wednesday, Thursday, Friday ];
+      let guest = $(this).text();
 
-      //Завъртаме масива по броя на съществуващите му елементи
-      for(let i = 0; i < thisWeeklyGuests.length; i ++) {
+      //Вмъкваме всеки един гост в масивa
+      thisWeeklyGuests.push(guest);
+    });
 
-        //Проверяваме всеки един от елементите дали има дължина
-        if(thisWeeklyGuests[i].length) {
+    //Завъртаме масива по броя на съществуващите му елементи
+    for(let i = 0; i < thisWeeklyGuests.length; i ++) {
 
-          //Взимаме датата на която ще гостува госта
-          let date = thisWeeklyGuests[i].split(" ").slice(0,3).toString().replace(/,/g, ' ');
+      //Проверяваме всеки един от елементите дали има дължина
+      if(thisWeeklyGuests[i].length) {
 
-          //Взимаме имената на госта
-          let names = thisWeeklyGuests[i].substr(17, thisWeeklyGuests[i].length);
+        //Взимаме датата на която ще гостува госта
+        let date = thisWeeklyGuests[i].split(" ").slice(0,3).toString().replace(/,/g, ' ');
 
-          //Правим нов запис в нашата база с датата, часът и имената
-          let guest = new Guest( { date: date, hour: hour, guest: names } );
+        //Взимаме имената на госта
+        let names = thisWeeklyGuests[i].substr(17, thisWeeklyGuests[i].length);
 
-          guest.save();
-        } 
-      }
-    }
+        //Правим нов запис в нашата база с датата, часът и имената
+        let guest = new Guest( { date: date, hour: hour, guest: names } );
+
+        guest.save();
+      } 
+    }   
   });
 }
-setInterval(returnGuestsOfSlaviShow, 15 * 10000);
+setInterval(returnGuestsOfSlaviShow, 12 * 60 * 60 * 1000);
 
 
 
