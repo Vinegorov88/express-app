@@ -69,7 +69,7 @@ module.exports.btcToUsd = function(req, res){
 
 
 
-//Функция която връща html от подаден сайт и взима нужната информация в случая от --> http://www.slavishow.com
+//Функция която връща html от --> http://www.slavishow.com
 function returnGuestsOfSlaviShow(){
 
   //Използваме request библиотеката като подаваме желаният сайт
@@ -81,40 +81,47 @@ function returnGuestsOfSlaviShow(){
       //Зареждаме HTML-ла с cheerio библиотеката
       let $ = cheerio.load(html);
 
+      //Взимаме часът в момента
+      let hour = moment().format('HH:mm:ss');
+
       //Взимаме днешния ден от седмицата
       let day = moment().format('dddd');
 
-      //Проверяваме дали днешния ден не е сред почивни дни
-      if (['Saturday', 'Sunday'].includes(day)) return;
+      //Проверяваме дали днешния ден е различен от Петък, ако е различен приключваме
+      if(day != 'Friday') return;
       
       //Взимаме за всеки един ден госта на предаването
-      let guests = {
-        Monday: $('.right_column #category-list-4 .sidebar_list li').eq(0).find('h4').text(),
-        Tuesday: $('.right_column #category-list-4 .sidebar_list li').eq(1).find('h4').text(),
-        Wednesday: $('.right_column #category-list-4 .sidebar_list li').eq(2).find('h4').text(),
-        Thursday: $('.right_column #category-list-4 .sidebar_list li').eq(3).find('h4').text(),
-        Friday: $('.right_column #category-list-4 .sidebar_list li').eq(4).find('h4').text()   
-      }
+      let Monday = $('.right_column #category-list-4 .sidebar_list li').eq(0).find('h4').text();
+      let Tuesday = $('.right_column #category-list-4 .sidebar_list li').eq(1).find('h4').text();
+      let Wednesday = $('.right_column #category-list-4 .sidebar_list li').eq(2).find('h4').text();
+      let Thursday = $('.right_column #category-list-4 .sidebar_list li').eq(3).find('h4').text();
+      let Friday = $('.right_column #category-list-4 .sidebar_list li').eq(4).find('h4').text(); 
+      
+      //Вмъкваме всеки един ден от седмицата в масив
+      let thisWeeklyGuests = [ Monday, Tuesday, Wednesday, Thursday, Friday ];
 
-      //Намираме ключа от guests обекта, който отговаря на днешния ден, и взимаме неговата стойност (днешния гост на предаването)
-      let todaysGuest = guests[day];
+      //Завъртаме масива по броя на съществуващите му елементи
+      for(let i = 0; i < thisWeeklyGuests.length; i ++) {
 
-        //Правим запис в нашата базата с взетата нужна информация
-      Guest.findOne({_id: "5c924ce36503a2771bfe50fe"}, function(err, guest){
+        //Проверяваме всеки един от елементите дали има дължина
+        if(thisWeeklyGuests[i].length) {
 
-        //Проверяваме за грешка
-        if(err) return;
+          //Взимаме датата на която ще гостува госта
+          let date = thisWeeklyGuests[i].split(" ").slice(0,3).toString().replace(/,/g, ' ');
 
-        //Проверяваме дали имаме направен запис с същата информация
-        if(guest.todaysGuest != todaysGuest){
-          guest.todaysGuest = todaysGuest;
+          //Взимаме имената на госта
+          let names = thisWeeklyGuests[i].substr(17, thisWeeklyGuests[i].length);
+
+          //Правим нов запис в нашата база с датата, часът и имената
+          let guest = new Guest( { date: date, hour: hour, guest: names } );
+
           guest.save();
         } 
-      });
+      }
     }
   });
 }
-setInterval(returnGuestsOfSlaviShow, 60 * 1000);
+setInterval(returnGuestsOfSlaviShow, 15 * 10000);
 
 
 
@@ -125,14 +132,15 @@ module.exports.guestSlaviShow = function(req, res){
 
   let date = moment().locale('bg').format('DD MMMM YYYY');
 
-  Guest.findOne({date: date}, function(err, guest){
+  
+  Guest.find({}).sort({_id:-1}).limit(1), function(err, guest){
     
     //Провим проверка за грешка
     if(err) return error404(req, res);
 
     //Изпращаме взетите данни от нашата база към рута
-    res.send({guest: guest.guest});
-  });
+    res.send({date: date, guest: guest.guest});
+  }
 }
 
 
