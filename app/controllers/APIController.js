@@ -55,7 +55,7 @@ function returnBtcToUsd(){
     });
   });
 }
-// setInterval(returnBtcToUsd, 3000);
+// setInterval(returnBtcToUsd, 5000);
 
 
 
@@ -79,7 +79,7 @@ function returnGuestsOfSlaviShow(){
     if(error) return;
 
     //Зареждаме HTML-ла с cheerio библиотеката
-    let $ = cheerio.load(html), thisWeeklyGuests = [];
+    let $ = cheerio.load(html);
 
     //Взимаме часът в момента
     let hour = moment().format('HH:mm:ss');
@@ -88,39 +88,32 @@ function returnGuestsOfSlaviShow(){
     let day = moment().format('dddd');
 
     //Проверяваме дали днешния ден е различен от Петък, ако е различен приключваме
-    if(day != 'Saturday') return;
+    if(day == 'Friday') return;
 
     //Взимаме всички гости за следващата седмица
     $('.right_column #category-list-4 .sidebar_list li').find('h4').each(function (i, item){
 
-      //Взимаме за всеки един ден госта на предаването
-      let guest = $(this).text();
 
-      //Вмъкваме всеки един гост в масивa
-      thisWeeklyGuests.push(guest);
+
+      let ss = $(this).text().split('г').shift();
+
+
+      console.log(ss)
+
+      //Взимаме датата на която ще гостува госта
+      let date = $(this).text().split(" ").slice(0,3).toString().replace(/,/g, ' ');
+
+      //Взимаме имената на госта
+      let names = $(this).text().substr(17, $(this).text().length);
+
+      //Правим нов запис в нашата база с датата, часът и имената
+      let guest = new Guest( { date: date, hour: hour, guest: names } );
+
+      // guest.save();   
     });
-
-    //Завъртаме масива по броя на съществуващите му елементи
-    for(let i = 0; i < thisWeeklyGuests.length; i ++) {
-
-      //Проверяваме всеки един от елементите дали има дължина
-      if(thisWeeklyGuests[i].length) {
-
-        //Взимаме датата на която ще гостува госта
-        let date = thisWeeklyGuests[i].split(" ").slice(0,3).toString().replace(/,/g, ' ');
-
-        //Взимаме имената на госта
-        let names = thisWeeklyGuests[i].substr(17, thisWeeklyGuests[i].length);
-
-        //Правим нов запис в нашата база с датата, часът и имената
-        let guest = new Guest( { date: date, hour: hour, guest: names } );
-
-        guest.save();
-      } 
-    }   
   });
 }
-setInterval(returnGuestsOfSlaviShow, 12 * 60 * 60 * 1000);
+// setInterval(returnGuestsOfSlaviShow, 5000);
 
 
 
@@ -129,16 +122,36 @@ setInterval(returnGuestsOfSlaviShow, 12 * 60 * 60 * 1000);
 //Взимаме вече записаните данни от базата с днешния гост за деня и ги изпращаме към съотвения рут
 module.exports.guestSlaviShow = function(req, res){
 
+  //Взимаме днешния ден от седмицата
+  let day = moment().format('dddd')
+
+  //Взимаме днешната дата
   let date = moment().locale('bg').format('DD MMMM YYYY');
 
-  
-  Guest.find({}).sort({_id:-1}).limit(1), function(err, guest){
-    
-    //Провим проверка за грешка
-    if(err) return error404(req, res);
+  //Проверяваме днешният ден дали е Събота или Неделя
+  if(day == 'Saturday' || day == "Sunday"){
 
-    //Изпращаме взетите данни от нашата база към рута
-    res.send({date: date, guest: guest.guest});
+    //Връщаме последният запис от базата госта за Понеделник
+    Guest.findOne({}, null, {sort: {_id: -1}}, function(err, guest){
+
+      //Правим проверка за грешка
+      if(err) return;
+  
+      //Изпращаме взетите данни от нашата база към рута
+      res.send({date: guest.date, guest: guest.guest});
+    })
+  }
+
+  else {
+    //Търсим по днешната дата госта в базата и го връщаме
+    Guest.findOne({date: date}, function(err, guest){
+
+      //Правим проверка за грешка
+      if(err) return;
+  
+      //Изпращаме взетите данни от нашата база към рута
+      res.send({date: guest.date, guest: guest.guest});
+    })
   }
 }
 
